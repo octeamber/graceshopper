@@ -71,7 +71,7 @@ async function seed() {
     User.create({email: 'murphy@email.com', password: '123'})
   ])
 
-  const items = await Promise.all(
+  await Promise.all(
     items.map(item => {
       return Item.create(item)
     })
