@@ -1,7 +1,67 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Item, Cart} = require('../server/db/models')
+
+const items = [
+  {
+    name: 'Creamsicle Mug',
+    price: 24,
+    description: 'A good coffee mug.',
+    qty: null,
+    imageUrl: '../public/images/placeholder.jpg'
+  },
+  {
+    name: 'Pink Mug',
+    price: 20,
+    description: 'A small coffee mug.',
+    qty: null,
+    imageUrl: '../public/images/placeholder.jpg'
+  },
+  {
+    name: 'Small Pasta Bowl',
+    price: 22,
+    description: 'Perfect for pasta.',
+    qty: null,
+    imageUrl: '../public/images/placeholder.jpg'
+  },
+  {
+    name: 'Salt Jar',
+    price: 40,
+    description: 'A lidded jar for salt on your counter.',
+    qty: null,
+    imageUrl: require('../public/images/placeholder.jpg')
+  },
+  {
+    name: 'Butter jar',
+    price: 45,
+    description: 'A lidded jar for storing butter.',
+    qty: null,
+    imageUrl: require('../public/images/placeholder.jpg')
+  },
+  {
+    name: 'Matcha Cup',
+    price: 26,
+    description: 'A light weight cup for matcha.',
+    qty: null,
+    imageUrl: require('../public/images/placeholder.jpg')
+  },
+  {
+    name: 'Lipped Cereal Bowl',
+    price: 30,
+    description: 'A big bowl for cereal.',
+    qty: null,
+    imageUrl: require('../public/images/placeholder.jpg')
+  },
+  {
+    name: 'Low Chicken Bowl',
+    price: 45,
+    description: 'A low serving bowl.',
+    qty: null,
+    imageUrl: require('../public/images/placeholder.jpg')
+  },
+  {}
+]
 
 async function seed() {
   await db.sync({force: true})
