@@ -24,20 +24,10 @@ module.exports = db.define('item', {
   },
   qty: {
     type: Sequelize.INTEGER,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    allowNull: true
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: ''
+    defaultValue: 'https://p0.storage.canalblog.com/02/82/119589/127102303.jpg'
   }
 })
-
-// name
-// price
-// description (add measurements)
-// qty (amount of items in stock)
-// qty (how many items a person wants to buy)
-// imageUrl
