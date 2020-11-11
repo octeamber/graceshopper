@@ -1,16 +1,17 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Cart = db.define('cart', {
-  totalPrice: {
-    type: Sequelize.FLOAT,
-    allowNull: false,
+const Order = db.define('order', {
+  ordered: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
     validate: {
       notEmpty: true
-    }
+    },
+    allowNull: false
   },
-  totalQty: {
-    type: Sequelize.INTEGER,
+  sessionId: {
+    type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notEmpty: true
@@ -18,6 +19,6 @@ const Cart = db.define('cart', {
   }
 })
 
-module.exports = Cart
+module.exports = Order
 
 // QUES: what instance methods would we want to place here?
