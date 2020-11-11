@@ -9,13 +9,6 @@ const Order = db.define('order', {
       notEmpty: true
     },
     allowNull: false
-  },
-  sessionId: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
   }
 })
 
