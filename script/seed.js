@@ -9,56 +9,56 @@ const products = [
     price: 24,
     description: 'A good coffee mug.',
     qty: 10,
-    imageUrl: '../public/images/placeholder.jpg'
+    imageUrl: '../public/images/creamsicle_mug.jpg'
   },
   {
     name: 'Pink Mug',
     price: 20,
     description: 'A small coffee mug.',
     qty: 10,
-    imageUrl: '../public/images/placeholder.jpg'
+    imageUrl: '../public/images/pink_mug.jpg'
   },
   {
     name: 'Small Pasta Bowl',
     price: 22,
     description: 'Perfect for pasta.',
     qty: 10,
-    imageUrl: '../public/images/placeholder.jpg'
+    imageUrl: '../public/images/small_pasta_bowl.jpg'
   },
   {
     name: 'Salt Jar',
     price: 40,
     description: 'A lidded jar for salt on your counter.',
     qty: 10,
-    imageUrl: '../public/images/placeholder.jpg'
+    imageUrl: '../public/images/salt_jar.jpg'
   },
   {
     name: 'Butter jar',
     price: 45,
     description: 'A lidded jar for storing butter.',
     qty: 10,
-    imageUrl: '../public/images/placeholder.jpg'
+    imageUrl: '../public/images/butter_jar.jpg'
   },
   {
     name: 'Matcha Cup',
     price: 26,
     description: 'A light weight cup for matcha.',
     qty: 10,
-    imageUrl: '../public/images/placeholder.jpg'
+    imageUrl: '../public/images/matcha_cup.jpg'
   },
   {
     name: 'Lipped Cereal Bowl',
     price: 30,
     description: 'A big bowl for cereal.',
     qty: 10,
-    imageUrl: '../public/images/placeholder.jpg'
+    imageUrl: '../public/images/large_cereal_bowl.jpg'
   },
   {
-    name: 'Low Chicken Bowl',
+    name: 'Low Fish Bowl',
     price: 45,
     description: 'A low serving bowl.',
     qty: 10,
-    imageUrl: '../public/images/placeholder.jpg'
+    imageUrl: '../public/images/fish_bowl.jpg'
   }
 ]
 
