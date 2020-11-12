@@ -6,59 +6,59 @@ const {User, Product, Order} = require('../server/db/models')
 const products = [
   {
     name: 'Creamsicle Mug',
-    price: 24,
+    price: 2400,
     description: 'A good coffee mug.',
     qty: 10,
-    imageUrl: '../public/images/creamsicle_mug.jpg'
+    imageUrl: '../images/creamsicle_mug.jpg'
   },
   {
     name: 'Pink Mug',
-    price: 20,
+    price: 2000,
     description: 'A small coffee mug.',
     qty: 10,
-    imageUrl: '../public/images/pink_mug.jpg'
+    imageUrl: '../images/pink_mug.jpg'
   },
   {
     name: 'Small Pasta Bowl',
-    price: 22,
+    price: 2200,
     description: 'Perfect for pasta.',
     qty: 10,
-    imageUrl: '../public/images/small_pasta_bowl.jpg'
+    imageUrl: '../images/small_pasta_bowl.jpg'
   },
   {
     name: 'Salt Jar',
-    price: 40,
+    price: 4000,
     description: 'A lidded jar for salt on your counter.',
     qty: 10,
-    imageUrl: '../public/images/salt_jar.jpg'
+    imageUrl: '../images/salt_jar.jpg'
   },
   {
     name: 'Butter jar',
-    price: 45,
+    price: 4500,
     description: 'A lidded jar for storing butter.',
     qty: 10,
-    imageUrl: '../public/images/butter_jar.jpg'
+    imageUrl: '../images/butter_jar.jpg'
   },
   {
     name: 'Matcha Cup',
-    price: 26,
+    price: 2650,
     description: 'A light weight cup for matcha.',
     qty: 10,
-    imageUrl: '../public/images/matcha_cup.jpg'
+    imageUrl: '../images/matcha_cup.jpg'
   },
   {
     name: 'Lipped Cereal Bowl',
-    price: 30,
+    price: 3099,
     description: 'A big bowl for cereal.',
     qty: 10,
-    imageUrl: '../public/images/large_cereal_bowl.jpg'
+    imageUrl: '../images/large_cereal_bowl.jpg'
   },
   {
     name: 'Low Fish Bowl',
-    price: 45,
+    price: 4555,
     description: 'A low serving bowl.',
     qty: 10,
-    imageUrl: '../public/images/fish_bowl.jpg'
+    imageUrl: '../images/fish_bowl.jpg'
   }
 ]
 
