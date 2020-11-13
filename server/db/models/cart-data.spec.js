@@ -10,18 +10,17 @@ describe('CartData model', () => {
   })
 
   describe('column definitions and validations', () => {
-    // it('has a `quantity` and `price`', async () => {
-    //   const groCart = await CartData.create({
-    //     qty: 3,
-    //     price: 10899,
-    //     // cannot make this because we need associations
-    //     // productId: 2,
-    //     // orderId: 8
-    //   })
-
-    //   expect(groCart.qty).to.equal(3)
-    //   expect(groCart.price).to.equal(10899)
-    // })
+    it('has a `quantity` and `price`', async () => {
+      //   const groCart = await CartData.create({
+      //     qty: 3,
+      //     price: 10899,
+      //     // cannot make this because we need associations
+      //     // productId: 2,
+      //     // orderId: 8
+      //   })
+      //   expect(groCart.qty).to.equal(3)
+      //   expect(groCart.price).to.equal(10899)
+    })
 
     it('`price` is required', async () => {
       const groCart = CartData.build()
