@@ -9,27 +9,39 @@ import {Link} from 'react-router-dom'
 
 class SingleProduct extends React.Component {
   componentDidMount() {
-    this.props.getProduct()
+    this.props.getProduct(this.props.match.params.id)
   }
 
   render() {
     const {product} = this.props
-    // console.log('THIS.PROPS IN SINGLE PROD', this.props)
+
     return (
       <div>
-        <img src={product.imageUrl} />
+        <img src={product.imageUrl} style={{width: '300px'}} />
         <h2>{product.name}</h2>
+        <h3>Price: ${product.price / 100}</h3>
         <p>{product.description}</p>
-        <p>{product.price / 100}</p>
-        <p>{product.qty}</p>
+        {/* choose on of the following, or delete both if we run out of time */}
+        <input
+          type="number"
+          name="qty"
+          min="1"
+          max={product.qty}
+          placeholder="Qty"
+        />
+        <select name="qty">
+          Please select
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+        <button>Add to Cart</button>
       </div>
     )
   }
 }
 
 const mapState = state => {
-  // state.product is empty
-  // console.log('STATE IN SINGLE PROD', state)
   return {
     product: state.product
   }
@@ -37,7 +49,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getProduct: () => dispatch(fetchProduct())
+    getProduct: id => dispatch(fetchProduct(id))
   }
 }
 

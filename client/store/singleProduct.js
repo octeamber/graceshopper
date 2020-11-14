@@ -13,20 +13,17 @@ const GET_PRODUCT = 'GET_PRODUCT'
 /**
  * ACTION CREATORS
  */
-const getStudent = product => ({type: GET_PRODUCT, product})
+const getProduct = product => ({type: GET_PRODUCT, product})
 
 /**
  * THUNK CREATORS
  */
 
 export const fetchProduct = id => async dispatch => {
-  // somehow i'm not getting a response?
   try {
-    console.log('SINGLE PRODUCT THUNK')
     const response = await axios.get(`/api/products/${id}`)
-    console.log('RESPONSE IN FETCH PRODUCT', response)
     const product = response.data
-    dispatch(getStudent(product))
+    dispatch(getProduct(product))
   } catch (error) {
     console.error('Something went wrong fetching a single product ', error)
   }
