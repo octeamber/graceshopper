@@ -1,31 +1,5 @@
 import axios from 'axios'
 
-const dummyData = [
-  {
-    id: 1,
-    name: 'Creamsicle Mug',
-    price: 2400,
-    description: 'A good coffee mug.',
-    qty: 10,
-    imageUrl: '../images/creamsicle_mug.jpg'
-  },
-  {
-    id: 2,
-    name: 'Pink Mug',
-    price: 2000,
-    description: 'A small coffee mug.',
-    qty: 10,
-    imageUrl: '../images/pink_mug.jpg'
-  },
-  {
-    id: 3,
-    name: 'Small Pasta Bowl',
-    price: 2200,
-    description: 'Perfect for pasta.',
-    qty: 10,
-    imageUrl: '../images/small_pasta_bowl.jpg'
-  }
-]
 /**
  * ACTION TYPES
  */
@@ -38,10 +12,10 @@ const ADD_PRODUCT = 'ADD_PRODUCT'
  * ACTION CREATORS
  */
 const setProducts = products => ({type: SET_PRODUCTS, products})
+const addProduct = product => ({type: ADD_PRODUCT, product})
 const editQty = (productId, newQty) => ({type: EDIT_QTY, productId, newQty})
 const removeProduct = productId => ({type: REMOVE_PRODUCT, productId})
 const checkout = orderId => ({type: CHECKOUT, orderId}) //IN THE FRONT END THIS JUST CLEARS THE STATE, IN THE BACKEND IT FLIPS THE BOLEEAN
-const addProduct = product => product
 
 /**
  * THUNK CREATORS
@@ -49,18 +23,25 @@ const addProduct = product => product
 
 export const fetchCartProducts = () => async dispatch => {
   try {
-    const response = await axios.get('')
+    const response = await axios.get('/api/orders/cart')
     const products = response.data
     dispatch(setProducts(products))
   } catch (error) {
     console.error('SOMETHING WENT WRONG ', error)
   }
 }
+export const addProductToCart = product => async dispatch => {
+  try {
+    await axios.put('/api/orders', {product})
+    dispatch(addProduct(product))
+  } catch (error) {
+    console.error('SOMETHING WENT WRONG ', error)
+  }
+}
 export const changeQty = (productId, newQty) => async dispatch => {
   try {
-    const response = await axios.put('') // HERE WE NEED TO UPDATE THE QTY FROM THE DB
-    const products = response.data
-    dispatch(editQty(products))
+    await axios.put('') // HERE WE NEED TO UPDATE THE QTY FROM THE DB
+    dispatch(editQty(productId, newQty))
   } catch (error) {
     console.error('SOMETHING WENT WRONG ', error)
   }
