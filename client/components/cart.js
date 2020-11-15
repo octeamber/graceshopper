@@ -1,14 +1,22 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchCartProducts} from '../store/cart-reducer'
+import {fetchCartProducts, checkoutProducts} from '../store/cart-reducer'
 import SingleCartProduct from './cart-product'
 
 /**
  * COMPONENT
  */
 class UserCart extends React.Component {
+  constructor() {
+    super()
+    this.handleCheckout = this.handleCheckout.bind(this)
+  }
   componentDidMount() {
     this.props.getCartProducts()
+  }
+  async handleCheckout() {
+    await this.props.checkout()
+    this.props.history.push('cart/checkout')
   }
   render() {
     const {products} = this.props
@@ -27,7 +35,9 @@ class UserCart extends React.Component {
             0
           )}
         </div>
-        <button type="button">checkout</button>
+        <button type="button" onClick={this.handleCheckout}>
+          checkout
+        </button>
       </div>
     )
   }
@@ -43,7 +53,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getCartProducts: () => dispatch(fetchCartProducts())
+    getCartProducts: () => dispatch(fetchCartProducts()),
+    checkout: () => dispatch(checkoutProducts())
   }
 }
 

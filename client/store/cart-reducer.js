@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 //Dummy data
+// const orderId = 5
 const products = [
   {
     id: 8,
@@ -84,8 +85,8 @@ export const deleteProduct = productId => {
 
 export const checkoutProducts = () => async dispatch => {
   try {
-    const response = await axios.put('/api/orders/cart')
-    const orderId = response.data
+    // const response = await axios.put('/api/orders/cart')
+    // const orderId = response.data
     dispatch(checkout(orderId))
   } catch (error) {
     console.error('SOMETHING WENT WRONG ', error)
