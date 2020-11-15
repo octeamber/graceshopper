@@ -1,9 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {deleteProduct} from '../store/cart-reducer'
+import {deleteProduct, changeQty} from '../store/cart-reducer'
 
 const SingleCartProduct = props => {
-  const {product, removeProduct} = props
+  const {product, removeProduct, updateQty} = props
   return (
     <div>
       <h4>{product.name}</h4>
@@ -12,11 +12,12 @@ const SingleCartProduct = props => {
         <div>
           <p>Total price: ${product.price / 100 * product.orderQty}</p>
           <input
+            onChange={event => updateQty(product.id, event.target.value)}
             type="number"
             name="qty"
             min="1"
             max={product.qty}
-            placeholder={product.orderQty}
+            value={product.orderQty}
           />
           <button type="button" onClick={() => removeProduct(product.id)}>
             remove product
@@ -29,7 +30,8 @@ const SingleCartProduct = props => {
 
 const mapDispatch = dispatch => {
   return {
-    removeProduct: id => dispatch(deleteProduct(id))
+    removeProduct: id => dispatch(deleteProduct(id)),
+    updateQty: (id, newQty) => dispatch(changeQty(id, newQty))
   }
 }
 

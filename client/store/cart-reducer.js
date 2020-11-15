@@ -64,7 +64,7 @@ export const addProductToCart = (product, orderQty) => async dispatch => {
 }
 export const changeQty = (productId, newQty) => async dispatch => {
   try {
-    await axios.put('/api/orders', {productId, qty: newQty})
+    // await axios.put('/api/orders', {productId, qty: newQty})
     dispatch(editQty(productId, newQty))
   } catch (error) {
     console.error('SOMETHING WENT WRONG ', error)
