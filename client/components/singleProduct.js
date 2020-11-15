@@ -29,12 +29,6 @@ class SingleProduct extends React.Component {
           max={product.qty}
           placeholder="Qty"
         />
-        <select name="qty">
-          Please select
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-        </select>
         <button>Add to Cart</button>
       </div>
     )
