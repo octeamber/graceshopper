@@ -33,3 +33,7 @@ form div {
   width: 35%;
   align-items: baseline;
 }
+
+.cartProduct {
+  display: flex;
+}

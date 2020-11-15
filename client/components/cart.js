@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchCartProducts} from '../store/cart-reducer'
-import {Link} from 'react-router-dom'
+import SingleCartProduct from './cart-product'
 
 /**
  * COMPONENT
@@ -11,48 +11,23 @@ class UserCart extends React.Component {
     this.props.getCartProducts()
   }
   render() {
-    // const {products} = this.props
-
-    const products = [
-      {
-        name: 'Creamsicle Mug',
-        price: 2400,
-        description: 'A good coffee mug.',
-        qty: 10,
-        imageUrl: '../images/creamsicle_mug.jpg'
-      },
-      {
-        name: 'Pink Mug',
-        price: 2000,
-        description: 'A small coffee mug.',
-        qty: 10,
-        imageUrl: '../images/pink_mug.jpg'
-      }
-    ]
-
+    const {products} = this.props
     return (
       <div>
-        <h1>Products in your cart: </h1>
+        <h2>Products in your cart: </h2>
         <div>
           {products.map(product => (
-            <div key={product.id}>
-              <h4>{product.name}</h4>
-              <img
-                src={product.imageUrl}
-                style={{width: '60px', height: '80px'}}
-              />
-              <input
-                type="number"
-                name="qty"
-                min="1"
-                max={product.qty}
-                placeholder="Qty"
-              />
-              <p>${product.price / 100}</p>
-            </div>
+            <SingleCartProduct key={product.id} product={product} />
           ))}
         </div>
-        <button>checkout</button>
+        <div>
+          Total amount: $
+          {products.reduce(
+            (acc, product) => product.price / 100 * product.orderQty + acc,
+            0
+          )}
+        </div>
+        <button type="button">checkout</button>
       </div>
     )
   }
