@@ -19,3 +19,17 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+#header {
+  display: flex;
+  justify-content: space-evenly;
+  width: 35%;
+  align-items: baseline;
+}
+
+#footer {
+  display: flex;
+  justify-content: space-evenly;
+  width: 35%;
+  align-items: baseline;
+}
