@@ -4,9 +4,9 @@ import {Link} from 'react-router-dom'
 
 const Checkout = props => {
   // const {id, email, cart} = props
-  const id = 3
-  // const email = ''
-  const email = 'cody@gmail.com'
+  const id = null
+  const email = ''
+  //const email = 'cody@gmail.com'
   // const cart = [5]
   return (
     <div>

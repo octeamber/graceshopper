@@ -3,6 +3,18 @@
 const db = require('../server/db')
 const {User, Product, Order} = require('../server/db/models')
 
+const orders = [
+  {
+    ordered: false
+  },
+  {
+    ordered: true
+  },
+  {
+    ordered: false
+  }
+]
+
 const products = [
   {
     name: 'Creamsicle Mug',
@@ -74,6 +86,12 @@ async function seed() {
   await Promise.all(
     products.map(product => {
       return Product.create(product)
+    })
+  )
+
+  await Promise.all(
+    orders.map(order => {
+      return Order.create(order)
     })
   )
 

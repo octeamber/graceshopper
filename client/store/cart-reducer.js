@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 //Dummy data
-// const orderId = 5
+const orderId = 5
 const products = [
   {
     id: 8,
@@ -52,15 +52,16 @@ export const fetchCartProducts = () => async dispatch => {
     // const products = response.data
     dispatch(setProducts(products))
   } catch (error) {
-    console.error('SOMETHING WENT WRONG ', error)
+    console.error('SOMETHING WENT WRONG SETTING PRODUCTS ', error)
   }
 }
 export const addProductToCart = (product, orderQty) => async dispatch => {
+  console.log(orderQty)
   try {
-    await axios.post('/api/orders', {productId: product.id, qty: orderQty})
+    await axios.post(`/api/orders/${product.id}`, {qty: orderQty})
     dispatch(addProduct(product, orderQty))
   } catch (error) {
-    console.error('SOMETHING WENT WRONG ', error)
+    console.error('SOMETHING WENT WRONG ADDING PRODUCT ', error)
   }
 }
 export const changeQty = (productId, newQty) => async dispatch => {
@@ -68,7 +69,7 @@ export const changeQty = (productId, newQty) => async dispatch => {
     // await axios.put('/api/orders', {productId, qty: newQty})
     dispatch(editQty(productId, newQty))
   } catch (error) {
-    console.error('SOMETHING WENT WRONG ', error)
+    console.error('SOMETHING WENT WRONG CHANGING QTY ', error)
   }
 }
 
@@ -89,7 +90,7 @@ export const checkoutProducts = () => async dispatch => {
     // const orderId = response.data
     dispatch(checkout(orderId))
   } catch (error) {
-    console.error('SOMETHING WENT WRONG ', error)
+    console.error('SOMETHING WENT WRONG CHEKING OUT ', error)
   }
 }
 //Initial State
