@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.post('/:productId', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const order = await Order.findOrCreate({
       where: {
@@ -25,14 +25,14 @@ router.post('/:productId', async (req, res, next) => {
         ordered: false
       }
     })
-    const product = await Product.findbyPk(req.params.productId)
+
+    const product = await Product.findbyPk(req.body.id)
     const price = product.price * req.body.qty
 
     const cartProduct = await order.addProduct({
-      where: {
-        price: price,
-        qty: req.body.qty
-      }
+      price: price,
+      qty: req.body.qty,
+      productId: req.body.id
     })
     res.send('SUCCESS')
   } catch (err) {
