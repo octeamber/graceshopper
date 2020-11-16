@@ -22,6 +22,14 @@ const products = [
     orderQty: 4
   }
 ]
+const aProduct = {
+  id: 13,
+  name: 'Salt Jar',
+  price: 4000,
+  description: 'A lidded jar for salt on your counter.',
+  qty: 10,
+  imageUrl: '../images/salt_jar.jpg'
+}
 /**
  * ACTION TYPES
  */
@@ -56,10 +64,9 @@ export const fetchCartProducts = () => async dispatch => {
   }
 }
 export const addProductToCart = (product, orderQty) => async dispatch => {
-  console.log(orderQty)
   try {
-    await axios.post(`/api/orders/${product.id}`, {qty: orderQty})
-    dispatch(addProduct(product, orderQty))
+    // await axios.post(`/api/orders/${product.id}`, {qty: orderQty})
+    dispatch(addProduct(aProduct, 3))
   } catch (error) {
     console.error('SOMETHING WENT WRONG ADDING PRODUCT ', error)
   }
@@ -105,14 +112,12 @@ export default function productsReducer(state = initialState, action) {
       return action.products
     case ADD_PRODUCT: {
       if (state.find(product => product.id === action.product.id))
-        return {
-          products: state.map(
-            product =>
-              product.id === action.product.id
-                ? {...product, orderQty: product.orderQty + action.orderQty}
-                : product
-          )
-        }
+        return state.map(
+          product =>
+            product.id === action.product.id
+              ? {...product, orderQty: product.orderQty + action.orderQty}
+              : product
+        )
       return [...state, {...action.product, orderQty: action.orderQty}]
     }
     case REMOVE_PRODUCT:

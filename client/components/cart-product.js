@@ -12,7 +12,9 @@ const SingleCartProduct = props => {
         <div>
           <p>Total price: ${product.price / 100 * product.orderQty}</p>
           <input
-            onChange={event => updateQty(product.id, event.target.value)}
+            onChange={event =>
+              updateQty(product.id, Number(event.target.value))
+            }
             type="number"
             name="qty"
             min="1"
