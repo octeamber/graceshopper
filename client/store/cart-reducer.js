@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+// clean up unused code, formatting
+
 //Dummy data
 // const orderId = 5
 // const products = [
@@ -108,6 +110,9 @@ const initialState = []
 /**
  * REDUCER
  */
+
+// why does add quantity flow through here? Can the logic get covered elsewhere?
+
 export default function productsReducer(state = initialState, action) {
   switch (action.type) {
     case SET_PRODUCTS:

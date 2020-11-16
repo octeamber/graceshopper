@@ -64,6 +64,7 @@ router.delete('/:productId', async (req, res, next) => {
   }
 })
 
+// add a custom class or instance method?
 router.put('/:productId', async (req, res, next) => {
   try {
     //find order

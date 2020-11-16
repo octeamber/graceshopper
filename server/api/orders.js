@@ -17,6 +17,9 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// reuse custom method here!!
+// add a response
+
 router.post('/', async (req, res, next) => {
   try {
     const order = await Order.findOrCreate({
