@@ -15,6 +15,9 @@ router.get('/', async (req, res, next) => {
       include: [Product]
     })
     res.json(carts)
+
+    console.log('THIS IS THE CART:', carts)
+
   } catch (err) {
     next(err)
   }
