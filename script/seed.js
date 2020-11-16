@@ -15,32 +15,20 @@ const {User, Product, Order, CartData} = require('../server/db/models')
   }
 ]*/
 
-const orders = [
-  {
-    ordered: false,
-    userId: 1
-  },
-  {
-    ordered: true,
-    userId: 1
-  },
-  {
-    ordered: false,
-    userId: 2
-  }
-]
-
-const orders = [
-  {
-    ordered: false
-  },
-  {
-    ordered: true
-  },
-  {
-    ordered: false
-  }
-]
+// const orders = [
+//   {
+//     ordered: false,
+//     userId: 1
+//   },
+//   {
+//     ordered: true,
+//     userId: 1
+//   },
+//   {
+//     ordered: false,
+//     userId: 2
+//   }
+// ]
 
 const products = [
   {
@@ -120,12 +108,11 @@ async function seed() {
     })
   )
 
-  await Promise.all(
-    orders.map(order => {
-      return Order.create(order)
-    })
-  )
-
+  // await Promise.all(
+  //   orders.map(order => {
+  //     return Order.create(order)
+  //   })
+  // )
 
   /*await Promise.all(
     cartdata.map(cartdata => {

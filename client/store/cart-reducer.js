@@ -1,35 +1,35 @@
 import axios from 'axios'
 
 //Dummy data
-const orderId = 5
-const products = [
-  {
-    id: 8,
-    name: 'Creamsicle Mug',
-    price: 2400,
-    description: 'A good coffee mug.',
-    qty: 10,
-    imageUrl: '../images/creamsicle_mug.jpg',
-    orderQty: 2
-  },
-  {
-    id: 4,
-    name: 'Pink Mug',
-    price: 2000,
-    description: 'A small coffee mug.',
-    qty: 10,
-    imageUrl: '../images/pink_mug.jpg',
-    orderQty: 4
-  }
-]
-const aProduct = {
-  id: 13,
-  name: 'Salt Jar',
-  price: 4000,
-  description: 'A lidded jar for salt on your counter.',
-  qty: 10,
-  imageUrl: '../images/salt_jar.jpg'
-}
+// const orderId = 5
+// const products = [
+//   {
+//     id: 8,
+//     name: 'Creamsicle Mug',
+//     price: 2400,
+//     description: 'A good coffee mug.',
+//     qty: 10,
+//     imageUrl: '../images/creamsicle_mug.jpg',
+//     orderQty: 2
+//   },
+//   {
+//     id: 4,
+//     name: 'Pink Mug',
+//     price: 2000,
+//     description: 'A small coffee mug.',
+//     qty: 10,
+//     imageUrl: '../images/pink_mug.jpg',
+//     orderQty: 4
+//   }
+// ]
+// const aProduct = {
+//   id: 13,
+//   name: 'Salt Jar',
+//   price: 4000,
+//   description: 'A lidded jar for salt on your counter.',
+//   qty: 10,
+//   imageUrl: '../images/salt_jar.jpg'
+// }
 /**
  * ACTION TYPES
  */
@@ -56,21 +56,23 @@ const checkout = orderId => ({type: CHECKOUT, orderId}) //IN THE FRONT END THIS 
 
 export const fetchCartProducts = () => async dispatch => {
   try {
-    // const response = await axios.get('/api/orders/cart')
-    // const products = response.data
+    const response = await axios.get('/api/orders/cart')
+    const products = response.data
     dispatch(setProducts(products))
   } catch (error) {
     console.error('SOMETHING WENT WRONG SETTING PRODUCTS ', error)
   }
 }
+
 export const addProductToCart = (product, orderQty) => async dispatch => {
   try {
-    // await axios.post(`/api/orders/${product.id}`, {qty: orderQty})
-    dispatch(addProduct(aProduct, 3))
+    await axios.post(`/api/orders/`, {qty: orderQty, id: product.id})
+    dispatch(addProduct(product, orderQty))
   } catch (error) {
     console.error('SOMETHING WENT WRONG ADDING PRODUCT ', error)
   }
 }
+
 export const changeQty = (productId, newQty) => async dispatch => {
   try {
     // await axios.put('/api/orders', {productId, qty: newQty})

@@ -6,7 +6,7 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    console.log(Object.keys(Order.prototype))
+    console.log('ORDER MAGIC METHODS', Object.keys(Order.prototype))
     const carts = await Order.findOne({
       where: {
         ordered: false,
@@ -17,7 +17,6 @@ router.get('/', async (req, res, next) => {
     res.json(carts)
 
     console.log('THIS IS THE CART:', carts)
-
   } catch (err) {
     next(err)
   }
