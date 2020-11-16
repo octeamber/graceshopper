@@ -17,7 +17,10 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+
 router.post('/', async (req, res, next) => {
+
+
   try {
     const order = await Order.findOrCreate({
       where: {
@@ -33,6 +36,7 @@ router.post('/', async (req, res, next) => {
       price: price,
       qty: req.body.qty,
       productId: req.body.id
+
     })
     res.send('SUCCESS')
   } catch (err) {

@@ -30,6 +30,18 @@ const orders = [
   }
 ]
 
+const orders = [
+  {
+    ordered: false
+  },
+  {
+    ordered: true
+  },
+  {
+    ordered: false
+  }
+]
+
 const products = [
   {
     name: 'Creamsicle Mug',
@@ -113,6 +125,7 @@ async function seed() {
       return Order.create(order)
     })
   )
+
 
   /*await Promise.all(
     cartdata.map(cartdata => {
