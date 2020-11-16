@@ -2,14 +2,26 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchProduct} from '../store/singleProduct'
 import {Link} from 'react-router-dom'
+import {addProductToCart} from '../store/cart-reducer'
 
 /**
  * COMPONENT
  */
 
 class SingleProduct extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      orderQty: 0
+    }
+    this.handleSubmitProduct = this.handleSubmitProduct.bind(this)
+  }
   componentDidMount() {
     this.props.getProduct(this.props.match.params.id)
+  }
+  handleSubmitProduct(event) {
+    event.preventDefault()
+    this.props.addProduct(this.props.product, this.state.orderQty)
   }
 
   render() {
@@ -28,8 +40,9 @@ class SingleProduct extends React.Component {
           min="1"
           max={product.qty}
           placeholder="Qty"
+          onChange={event => this.setState({orderQty: event.target.value})}
         />
-        <button>Add to Cart</button>
+        <button onClick={this.handleSubmitProduct}>Add to Cart</button>
       </div>
     )
   }
@@ -43,7 +56,9 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getProduct: id => dispatch(fetchProduct(id))
+    getProduct: id => dispatch(fetchProduct(id)),
+    addProduct: (product, orderQty) =>
+      dispatch(addProductToCart(product, orderQty))
   }
 }
 

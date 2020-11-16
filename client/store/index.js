@@ -5,12 +5,14 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 // need to rename the following file to products (plural)
 import productsReducer from './product'
+import cart from './cart-reducer'
 import productReducer from './singleProduct'
 
 const reducer = combineReducers({
   user,
   products: productsReducer,
-  product: productReducer
+  product: productReducer,
+  cart
 })
 
 const middleware = composeWithDevTools(
