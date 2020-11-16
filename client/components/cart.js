@@ -2,8 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {
   checkoutProducts,
-  addProductToCart,
-  fetchCartProducts
+  addProductToCart
+  // fetchCartProducts
 } from '../store/cart-reducer'
 import SingleCartProduct from './cart-product'
 
@@ -23,9 +23,9 @@ class UserCart extends React.Component {
     })
   }
 
-  componentDidMount() {
-    this.props.getProducts()
-  }
+  // componentDidMount() {
+  //   this.props.getProducts()
+  // }
 
   render() {
     const {products} = this.props
@@ -69,8 +69,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     checkout: () => dispatch(checkoutProducts()),
-    addTest: () => dispatch(addProductToCart()),
-    getProducts: () => dispatch(fetchCartProducts())
+    addTest: () => dispatch(addProductToCart())
+    // getProducts: () => dispatch(fetchCartProducts())
   }
 }
 

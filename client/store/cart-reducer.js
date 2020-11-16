@@ -56,7 +56,7 @@ const checkout = orderId => ({type: CHECKOUT, orderId}) //IN THE FRONT END THIS 
 
 export const fetchCartProducts = () => async dispatch => {
   try {
-    const response = await axios.get('/api/orders/cart')
+    const response = await axios.get('/api/orders')
     const products = response.data
     dispatch(setProducts(products))
   } catch (error) {
