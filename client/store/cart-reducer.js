@@ -66,7 +66,9 @@ export const fetchCartProducts = () => async dispatch => {
 
 export const addProductToCart = (product, orderQty) => async dispatch => {
   try {
+    console.log('THIS IS THE SINGLE PRODUCT PRODUCT: ', product)
     await axios.post(`/api/orders/`, {qty: orderQty, id: product.id})
+    //const productData = response.data
     dispatch(addProduct(product, orderQty))
   } catch (error) {
     console.error('SOMETHING WENT WRONG ADDING PRODUCT ', error)

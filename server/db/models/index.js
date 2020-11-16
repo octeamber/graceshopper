@@ -18,6 +18,7 @@ const CartData = require('./cart-data')
  */
 
 User.hasMany(Order)
+Order.belongsTo(User)
 Product.belongsToMany(Order, {through: CartData})
 Order.belongsToMany(Product, {through: CartData})
 

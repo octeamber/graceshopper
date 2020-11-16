@@ -19,18 +19,20 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const order = await Order.findOrCreate({
+    const [order] = await Order.findOrCreate({
       where: {
         userId: req.user.dataValues.id,
         ordered: false
       }
     })
+    //returns the order and a boolean value
 
-    console.log('ORDER', order)
+    //console.log('ORDER', order)
     const product = await Product.findByPk(req.body.id)
+    //console.log('THIS IS THE PRODUCT:', product)
     const price = product.price * req.body.qty
 
-    // console.log('ORDER MAGIC METHODS', Object.keys(Order.prototype))
+    //console.log('ORDER MAGIC METHODS', Object.keys(Order.prototype))
     // ORDER MAGIC METHODS [
     //   '_customGetters',    '_customSetters',
     //   'validators',        '_hasCustomGetters',
@@ -44,22 +46,25 @@ router.post('/', async (req, res, next) => {
     // ]
 
     // this works
-    await CartData.create({
+    /*await CartData.create({
       price: price,
       qty: req.body.qty,
       productId: req.body.id,
-      orderId: req.user.dataValues.id
+      orderId: order.dataValues.id
+    })*/
+
+    console.log('THIS IS THE REQ:', req.body)
+    //console.log('THIS IS THE HAS PRODUCTS MAGIC: ', order.hasProduct())
+    await order.addProduct(product, {
+      through: {
+        qty: req.body.qty,
+        price: price
+      }
     })
 
-    // await order.addProduct({
-    //   price: price,
-    //   qty: req.body.qty,
-    //   productId: req.body.id
-    // })
-
-    // console.log('PRODUCT POST ORDER', product)
+    console.log('PRODUCT POST ORDER', product)
     // console.log('POST ORDER', order.getProduct())
-    // res.send('SUCCESS')
+    res.send('SUCCESS')
   } catch (err) {
     next(err)
   }
