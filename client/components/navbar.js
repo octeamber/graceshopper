@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 // import AllProducts from './all-products'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = ({handleClick, isLoggedIn, productCount}) => (
   <div>
     <div id="header">
       <Link to="/">
@@ -15,7 +15,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         <h3>All Products</h3>
       </Link>
       <Link to="/cart">
-        <h3>Cart</h3>
+        <h3>Cart({productCount})</h3>
       </Link>
     </div>
     <nav>
@@ -44,7 +44,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    productCount: state.cart.length
   }
 }
 
