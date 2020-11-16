@@ -3,21 +3,21 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 const Checkout = props => {
-  // const {id, email, cart} = props
-  const id = null
-  const email = ''
-  //const email = 'cody@gmail.com'
-  // const cart = [5]
+  if (!props.location.state)
+    return (
+      <>
+        <h2>Nothing to see here, but you can shop for some ceramics...</h2>
+        <Link to="/products">Check out our products!</Link>
+      </>
+    )
+  const email = props.email
+  const orderId = props.location.state.orderId
   return (
     <div>
-      <h2>
-        {id
-          ? `Thank you ${email ? email : ''} for your purchase!`
-          : `Your cart is empty, there's nothing to checkout`}
-      </h2>
+      <h2>{`Thank you ${email ? email : ''} for your purchase!`}</h2>
       <p>
-        {id &&
-          `We hope you enjoyed your shopping experience.Your confirmation number is ${id}`}
+        {orderId &&
+          `We hope you enjoyed your shopping experience.Your confirmation number is ${orderId}`}
       </p>
       <Link to="/home">Go back to our home page</Link>
     </div>
@@ -26,9 +26,7 @@ const Checkout = props => {
 
 const mapState = state => {
   return {
-    id: state.cart.orderId,
-    email: state.user.email,
-    cart: state.cart.products
+    email: state.user.email
   }
 }
 

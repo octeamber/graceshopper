@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchCartProducts, checkoutProducts} from '../store/cart-reducer'
+import {checkoutProducts} from '../store/cart-reducer'
 import SingleCartProduct from './cart-product'
 
 /**
@@ -11,15 +11,18 @@ class UserCart extends React.Component {
     super()
     this.handleCheckout = this.handleCheckout.bind(this)
   }
-  componentDidMount() {
-    this.props.getCartProducts()
-  }
   async handleCheckout() {
-    await this.props.checkout()
-    this.props.history.push('cart/checkout')
+    const orderId = await this.props.checkout()
+    this.props.history.push({
+      pathname: 'cart/checkout',
+      state: {orderId: orderId}
+    })
   }
   render() {
     const {products} = this.props
+    if (!products.length) {
+      return <h2>Your cart is empty!</h2>
+    }
     return (
       <div>
         <h2>Products in your cart: </h2>
@@ -47,13 +50,12 @@ class UserCart extends React.Component {
  */
 const mapState = state => {
   return {
-    products: state.cart.products
+    products: state.cart
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    getCartProducts: () => dispatch(fetchCartProducts()),
     checkout: () => dispatch(checkoutProducts())
   }
 }

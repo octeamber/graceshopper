@@ -88,54 +88,44 @@ export const checkoutProducts = () => async dispatch => {
   try {
     // const response = await axios.put('/api/orders/cart')
     // const orderId = response.data
-    dispatch(checkout(orderId))
+    dispatch(checkout())
+    return orderId
   } catch (error) {
     console.error('SOMETHING WENT WRONG CHEKING OUT ', error)
   }
 }
 //Initial State
-const initialState = {products: []} // OUR STATE IS GOING TO HOLD 2 THINGS , AN ARRAY OF PRODUCTS AND AT THE END WHEN WE CHECKOUT AN ORDER ID
+const initialState = []
 /**
  * REDUCER
  */
 export default function productsReducer(state = initialState, action) {
   switch (action.type) {
     case SET_PRODUCTS:
-      return {products: action.products}
+      return action.products
     case ADD_PRODUCT: {
-      if (state.products.find(product => product.id === action.product.id))
+      if (state.find(product => product.id === action.product.id))
         return {
-          products: state.products.map(
+          products: state.map(
             product =>
               product.id === action.product.id
-                ? {...product, orderQty: action.orderQty}
+                ? {...product, orderQty: product.orderQty + action.orderQty}
                 : product
           )
         }
-      return {
-        products: [
-          ...state.products,
-          {...action.product, orderQty: action.orderQty}
-        ]
-      }
+      return [...state, {...action.product, orderQty: action.orderQty}]
     }
     case REMOVE_PRODUCT:
-      return {
-        products: state.products.filter(
-          product => product.id !== action.productId
-        )
-      }
+      return state.filter(product => product.id !== action.productId)
     case EDIT_QTY:
-      return {
-        products: state.products.map(
-          product =>
-            product.id === action.productId
-              ? {...product, orderQty: action.newQty}
-              : product
-        )
-      }
+      return state.map(
+        product =>
+          product.id === action.productId
+            ? {...product, orderQty: action.newQty}
+            : product
+      )
     case CHECKOUT:
-      return {products: [], orderId: action.orderId}
+      return []
     default:
       return state
   }
