@@ -43,3 +43,28 @@ router.post('/', forAdminAndUser, async (req, res, next) => {
     next(error)
   }
 })
+
+router.delete('/:productId', async (req, res, next) => {
+  try {
+    const deletedProduct = await Product.destroy({
+      where: {
+        id: req.params.productId
+      }
+    })
+    res.json(deletedProduct)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.put('/:productId', async (req, res, next) => {
+  try {
+    console.log('THIS IS THE PARAMS: ', req.params)
+    console.log('THIS IS THE BODY ', req.body)
+    const foundProduct = await Product.findByPk(req.params.productId)
+    const updatedProduct = await foundProduct.update(req.body)
+    res.json(updatedProduct)
+  } catch (error) {
+    next(error)
+  }
+})
