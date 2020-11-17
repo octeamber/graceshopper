@@ -12,19 +12,23 @@ label {
 
 nav a {
   display: inline-block;
-  margin: 1em;
-}
-
-form div {
-  margin: 1em;
-  display: inline-block;
+  margin: 0rem 5rem;
 }
 
 #header {
   display: flex;
+  flex-direction: row;
+  margin: 4rem 4rem;
+  margin-bottom: 0px;
+  justify-content: space-between;
+}
+
+#header .links {
+  width: 45em;
+  display: flex;
+  flex-direction: row;
   justify-content: space-evenly;
-  width: 35%;
-  align-items: baseline;
+  align-items: center;
 }
 
 #footer {
@@ -38,39 +42,24 @@ form div {
   display: flex;
 }
 
-button {
-  padding: 1em;
-  border: none;
-  font-size: 1em;
-  border-radius: 10px 10px 10px 10px;
-  outline: none;
-  letter-spacing: 0.1em;
-  color: white;
-  background-color: #053c5e;
-  width: 125px;
-  height: 50px;
-  justify-content: center;
-  text-align: center;
-}
-
-form {
+.row {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 1em;
-  align-content: center;
+  flex-wrap: wrap;
+  align-content: space-between;
 }
 
-form button {
-  color: white;
-  background-color: #053c5e;
-}
-form button:disabled {
-  background-color: #ccc;
+.row .column.column-40 {
+  flex: 0 0 30%;
+  max-width: 30%;
 }
 
-form input {
-  padding: 0.3em;
-  margin: 0.5em 0;
-  font-size: 0.5em;
+.column img {
+  width: 23rem;
+  height: 28rem;
+}
+
+.cartImage {
+  height: 25rem;
+  width: 20rem;
+  margin-right: 5rem;
 }

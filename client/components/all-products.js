@@ -17,12 +17,12 @@ class AllProducts extends React.Component {
 
     return (
       <div>
-        <div>
+        <div className="row">
           {products.map(product => (
-            <div key={product.id}>
+            <div className="column column-40" key={product.id}>
               <Link to={`/products/${product.id}`}>
                 <h2>{product.name}</h2>
-                <img src={product.imageUrl} style={{width: '300px'}} />
+                <img src={product.imageUrl} />
               </Link>
               <p>${product.price / 100}</p>
             </div>

@@ -39,7 +39,7 @@ class UserCart extends React.Component {
             0
           )}
         </div>
-        <button type="button" onClick={this.handleCheckout}>
+        <button type="button" className="button" onClick={this.handleCheckout}>
           checkout
         </button>
       </div>

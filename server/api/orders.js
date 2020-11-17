@@ -36,7 +36,6 @@ router.post('/', async (req, res, next) => {
         price: price
       }
     })
-
     res.send('SUCCESS')
   } catch (err) {
     next(err)
