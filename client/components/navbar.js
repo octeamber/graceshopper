@@ -46,7 +46,6 @@ const Navbar = ({handleClick, isLoggedIn, productCount}) => (
  * CONTAINER
  */
 const mapState = state => {
-  console.log('map state in navbar', state)
   return {
     isLoggedIn: !!state.user.id,
     productCount: state.cart.reduce((accum, currVal) => {
