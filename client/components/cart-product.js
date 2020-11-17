@@ -9,7 +9,7 @@ const SingleCartProduct = props => {
     <div>
       <h4>{product.name}</h4>
       <div className="cartProduct">
-        <img src={product.imageUrl} style={{width: '80px', height: '90px'}} />
+        <img className="cartImage" src={product.imageUrl} />
         <div>
           <p>Total price: ${product.price / 100 * orderQty}</p>
           <div>
@@ -25,7 +25,11 @@ const SingleCartProduct = props => {
               value={orderQty}
             />
           </div>
-          <button type="button" onClick={() => removeProduct(product.id)}>
+          <button
+            type="button"
+            className="button button-outline"
+            onClick={() => removeProduct(product.id)}
+          >
             remove product
           </button>
         </div>

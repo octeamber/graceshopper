@@ -48,7 +48,6 @@ router.post('/', forAdminAndUser, async (req, res, next) => {
         price: price
       }
     })
-
     res.send('SUCCESS')
   } catch (err) {
     next(err)
