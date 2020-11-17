@@ -56,7 +56,7 @@ const checkout = orderId => ({type: CHECKOUT, orderId}) //IN THE FRONT END THIS 
 
 export const fetchCartProducts = () => async dispatch => {
   try {
-    const response = await axios.get('/api/orders')
+    const response = await axios.get('/api/carts')
     const products = response.data
     dispatch(setProducts(products))
   } catch (error) {
@@ -66,9 +66,7 @@ export const fetchCartProducts = () => async dispatch => {
 
 export const addProductToCart = (product, orderQty) => async dispatch => {
   try {
-    console.log('THIS IS THE SINGLE PRODUCT PRODUCT: ', product)
     await axios.post(`/api/orders/`, {qty: orderQty, id: product.id})
-    //const productData = response.data
     dispatch(addProduct(product, orderQty))
   } catch (error) {
     console.error('SOMETHING WENT WRONG ADDING PRODUCT ', error)
@@ -77,7 +75,7 @@ export const addProductToCart = (product, orderQty) => async dispatch => {
 
 export const changeQty = (productId, newQty) => async dispatch => {
   try {
-    // await axios.put('/api/orders', {productId, qty: newQty})
+    //await axios.put(`/api/carts/${productId}`, {qty: newQty})
     dispatch(editQty(productId, newQty))
   } catch (error) {
     console.error('SOMETHING WENT WRONG CHANGING QTY ', error)
@@ -87,7 +85,7 @@ export const changeQty = (productId, newQty) => async dispatch => {
 export const deleteProduct = productId => {
   return async dispatch => {
     try {
-      // await axios.delete(`/api/orders/cart/${productId}`)
+      await axios.delete(`/api/carts/${productId}`)
       dispatch(removeProduct(productId))
     } catch (error) {
       console.log(error)
@@ -97,10 +95,10 @@ export const deleteProduct = productId => {
 
 export const checkoutProducts = () => async dispatch => {
   try {
-    // const response = await axios.put('/api/orders/cart')
-    // const orderId = response.data
+    const response = await axios.put('/api/carts')
+    const order = response.data
     dispatch(checkout())
-    return orderId
+    return order.id
   } catch (error) {
     console.error('SOMETHING WENT WRONG CHEKING OUT ', error)
   }

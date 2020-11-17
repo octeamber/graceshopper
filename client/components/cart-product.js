@@ -10,7 +10,10 @@ const SingleCartProduct = props => {
       <div className="cartProduct">
         <img src={product.imageUrl} style={{width: '80px', height: '90px'}} />
         <div>
-          <p>Total price: ${product.price / 100 * product.orderQty}</p>
+          <p>
+            Total price: ${Number(product.price) / 100 * product.cartData.qty}
+          </p>
+          <p>QTY: {product.cartData.qty}</p>
           <input
             onChange={event =>
               updateQty(product.id, Number(event.target.value))
@@ -19,7 +22,7 @@ const SingleCartProduct = props => {
             name="qty"
             min="1"
             max={product.qty}
-            value={product.orderQty}
+            value={product.cartData.qty}
           />
           <button type="button" onClick={() => removeProduct(product.id)}>
             remove product
