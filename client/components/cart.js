@@ -12,7 +12,7 @@ class UserCart extends React.Component {
     this.handleCheckout = this.handleCheckout.bind(this)
   }
   async handleCheckout() {
-    const orderId = await this.props.checkout()
+    const orderId = await this.props.checkout(this.props.userId)
     this.props.history.push({
       pathname: 'cart/checkout',
       state: {orderId: orderId}
@@ -51,7 +51,8 @@ class UserCart extends React.Component {
  */
 const mapState = state => {
   return {
-    products: state.cart
+    products: state.cart,
+    userId: state.user.id
   }
 }
 
