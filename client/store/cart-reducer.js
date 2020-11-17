@@ -9,7 +9,6 @@ const EDIT_QTY = 'EDIT_QTY'
 const REMOVE_PRODUCT = 'REMOVE_PRODUCTS'
 const CHECKOUT = 'CHECKOUT'
 const ADD_PRODUCT = 'ADD_PRODUCT'
-const ADD_TO_GUEST_CART = 'ADD_TO_GUEST_CART'
 
 /**
  * ACTION CREATORS
@@ -45,18 +44,22 @@ const checkout = orderId => ({
  * THUNK CREATORS
  */
 
-export const fetchCartProducts = () => async dispatch => {
+export const fetchCartProducts = id => async dispatch => {
   try {
-    const response = await axios.get('/api/carts')
+    if (id) {
+      const response = await axios.get('/api/carts')
 
-    const products = response.data.map(product => ({
-      ...product,
-      orderQty: product.cartData.qty
-    }))
+      const products = response.data.map(product => ({
+        ...product,
+        orderQty: product.cartData.qty
+      }))
 
-    products.forEach(product => delete product.cartData)
+      products.forEach(product => delete product.cartData)
 
-    dispatch(setProducts(products))
+      dispatch(setProducts(products))
+    } else {
+      dispatch(setProducts([]))
+    }
   } catch (error) {
     console.error('SOMETHING WENT WRONG SETTING PRODUCTS ', error)
   }
@@ -75,20 +78,28 @@ export const addProductToCart = (product, orderQty, id) => async dispatch => {
   }
 }
 
-export const changeQty = (productId, newQty) => async dispatch => {
+export const changeQty = (productId, newQty, id) => async dispatch => {
   try {
-    await axios.put(`/api/carts/${productId}`, {qty: newQty})
-    dispatch(editQty(productId, newQty))
+    if (id) {
+      await axios.put(`/api/carts/${productId}`, {qty: newQty})
+      dispatch(editQty(productId, newQty))
+    } else {
+      dispatch(editQty(productId, newQty))
+    }
   } catch (error) {
     console.error('SOMETHING WENT WRONG CHANGING QTY ', error)
   }
 }
 
-export const deleteProduct = productId => {
+export const deleteProduct = (productId, id) => {
   return async dispatch => {
     try {
-      await axios.delete(`/api/carts/${productId}`)
-      dispatch(removeProduct(productId))
+      if (id) {
+        await axios.delete(`/api/carts/${productId}`)
+        dispatch(removeProduct(productId))
+      } else {
+        dispatch(removeProduct(productId))
+      }
     } catch (error) {
       console.log(error)
     }
