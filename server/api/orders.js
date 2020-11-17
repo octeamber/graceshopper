@@ -24,7 +24,7 @@ router.post('/', async (req, res, next) => {
         ordered: false
       }
     })
-    //find or create returns the order and a boolean value
+    //NOTE: find or create returns the order and a boolean value
 
     const product = await Product.findByPk(req.body.id)
 

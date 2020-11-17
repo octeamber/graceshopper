@@ -13,5 +13,3 @@ const Order = db.define('order', {
 })
 
 module.exports = Order
-
-// QUES: what instance methods would we want to place here?
