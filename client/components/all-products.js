@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchProducts} from '../store/product'
+import {fetchProducts, deleteProduct} from '../store/product'
 import {Link} from 'react-router-dom'
 import ProductForm from './product-form'
 
@@ -11,6 +11,11 @@ class AllProducts extends React.Component {
   componentDidMount() {
     this.props.getProducts()
   }
+
+  deleteProduct(product) {
+    this.props.removeProduct(product)
+  }
+
   render() {
     const {products} = this.props
     const {user} = this.props
@@ -25,6 +30,15 @@ class AllProducts extends React.Component {
                 <img src={product.imageUrl} style={{width: '300px'}} />
               </Link>
               <p>${product.price / 100}</p>
+              {user.isAdmin && (
+                <button
+                  onClick={() => {
+                    this.deleteProduct(product)
+                  }}
+                >
+                  REMOVE PRODUCT
+                </button>
+              )}
             </div>
           ))}
         </div>
@@ -45,7 +59,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getProducts: () => dispatch(fetchProducts())
+    getProducts: () => dispatch(fetchProducts()),
+    removeProduct: product => dispatch(deleteProduct(product.id))
   }
 }
 

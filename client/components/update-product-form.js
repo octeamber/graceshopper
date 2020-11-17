@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {postNewProduct} from '../store/product'
+import {putProduct} from '../store/singleProduct'
 
-export class ProductForm extends React.Component {
+export class UpdateProductForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -23,8 +23,8 @@ export class ProductForm extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault()
-    const addProduct = this.props.addProduct
-    addProduct({
+    const updateProduct = this.props.updateProduct
+    updateProduct({
       name: this.state.productName,
       price: this.state.price,
       qty: this.state.qty,
@@ -103,14 +103,14 @@ export class ProductForm extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    products: state.products
+    product: state.singleProduct
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    addProduct: product => dispatch(postNewProduct(product))
+    updateProduct: product => dispatch(putProduct(product))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductForm)
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateProductForm)
