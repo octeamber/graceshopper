@@ -20,7 +20,11 @@ class SingleProduct extends React.Component {
   }
   handleSubmitProduct(event) {
     event.preventDefault()
-    this.props.addProduct(this.props.product, this.state.orderQty)
+    this.props.addProduct(
+      this.props.product,
+      this.state.orderQty,
+      this.props.userId
+    )
   }
 
   render() {
@@ -49,16 +53,18 @@ class SingleProduct extends React.Component {
 }
 
 const mapState = state => {
+  // console.log("MAP STATE IN SINGLE PROD", state)
   return {
-    product: state.product
+    product: state.product,
+    userId: state.user.id
   }
 }
 
 const mapDispatch = dispatch => {
   return {
     getProduct: id => dispatch(fetchProduct(id)),
-    addProduct: (product, orderQty) =>
-      dispatch(addProductToCart(product, orderQty))
+    addProduct: (product, orderQty, id) =>
+      dispatch(addProductToCart(product, orderQty, id))
   }
 }
 

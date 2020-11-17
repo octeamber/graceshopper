@@ -6,6 +6,15 @@ module.exports = router
 
 // SECURE ROUTES
 // no need to secure these routes?
+const forAdminAndUser = (req, res, next) => {
+  // console.log('isAdmin?', req.user.isAdmin)
+  if (!req.user.isAdmin || (!req.user && req.params.id !== req.user.id)) {
+    const err = new Error('FORBIDDEN!')
+    err.status = 401
+    return next(err)
+  }
+  next()
+}
 
 router.get('/', async (req, res, next) => {
   try {
@@ -26,7 +35,7 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', forAdminAndUser, async (req, res, next) => {
   try {
     const newProduct = await Product.create(req.body)
     res.json(newProduct)

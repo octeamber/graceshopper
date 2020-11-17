@@ -22,7 +22,7 @@ router.get('/', async (req, res, next) => {
     const carts = await Order.findOne({
       where: {
         ordered: false,
-        userId: req.user.dataValues.id // SOMETIMES GET AN ERROR THAT DATAVALUES DOES NOT EXIST
+        userId: req.user.dataValues.id
       },
       include: [Product]
     })
@@ -74,7 +74,7 @@ router.delete('/:productId', async (req, res, next) => {
         orderId: foundOrder.id
       }
     })
-    res.send('SUCCES')
+    res.sendStatus(202)
   } catch (err) {
     next(err)
   }

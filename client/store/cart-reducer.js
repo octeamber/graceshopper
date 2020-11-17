@@ -9,6 +9,7 @@ const EDIT_QTY = 'EDIT_QTY'
 const REMOVE_PRODUCT = 'REMOVE_PRODUCTS'
 const CHECKOUT = 'CHECKOUT'
 const ADD_PRODUCT = 'ADD_PRODUCT'
+const ADD_TO_GUEST_CART = 'ADD_TO_GUEST_CART'
 
 /**
  * ACTION CREATORS
@@ -61,10 +62,14 @@ export const fetchCartProducts = () => async dispatch => {
   }
 }
 
-export const addProductToCart = (product, orderQty) => async dispatch => {
+export const addProductToCart = (product, orderQty, id) => async dispatch => {
   try {
-    await axios.post(`/api/orders/`, {qty: orderQty, id: product.id})
-    dispatch(addProduct(product, orderQty))
+    if (id) {
+      await axios.post(`/api/orders/`, {qty: orderQty, id: product.id})
+      dispatch(addProduct(product, orderQty))
+    } else {
+      dispatch(addProduct(product, orderQty))
+    }
   } catch (error) {
     console.error('SOMETHING WENT WRONG ADDING PRODUCT ', error)
   }
