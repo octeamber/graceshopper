@@ -6,11 +6,6 @@ import axios from 'axios'
 const GET_PRODUCT = 'GET_PRODUCT'
 
 /**
- * INITIAL STATE
- */
-// const defaultProducts = {}
-
-/**
  * ACTION CREATORS
  */
 const getProduct = product => ({type: GET_PRODUCT, product})

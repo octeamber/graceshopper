@@ -12,17 +12,19 @@ const SingleCartProduct = props => {
         <img src={product.imageUrl} style={{width: '80px', height: '90px'}} />
         <div>
           <p>Total price: ${product.price / 100 * orderQty}</p>
-          <p>QTY: {orderQty}</p>
-          <input
-            onChange={event =>
-              updateQty(product.id, Number(event.target.value))
-            }
-            type="number"
-            name="qty"
-            min="1"
-            max={product.qty}
-            value={orderQty}
-          />
+          <div>
+            Qty:
+            <input
+              onChange={event =>
+                updateQty(product.id, Number(event.target.value))
+              }
+              type="number"
+              name="qty"
+              min="1"
+              max={product.qty}
+              value={orderQty}
+            />
+          </div>
           <button type="button" onClick={() => removeProduct(product.id)}>
             remove product
           </button>

@@ -32,7 +32,6 @@ class SingleProduct extends React.Component {
         <h2>{product.name}</h2>
         <h3>Price: ${product.price / 100}</h3>
         <p>{product.description}</p>
-        {/* choose on of the following, or delete both if we run out of time */}
         <input
           type="number"
           name="qty"

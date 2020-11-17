@@ -5,13 +5,9 @@ import axios from 'axios'
  */
 
 const SET_PRODUCTS = 'SET_PRODUCTS'
-
 const EDIT_QTY = 'EDIT_QTY'
-
 const REMOVE_PRODUCT = 'REMOVE_PRODUCTS'
-
 const CHECKOUT = 'CHECKOUT'
-
 const ADD_PRODUCT = 'ADD_PRODUCT'
 
 /**
@@ -52,12 +48,12 @@ export const fetchCartProducts = () => async dispatch => {
   try {
     const response = await axios.get('/api/carts')
 
-    const products = response.data
-      .map(product => ({
-        ...product,
-        orderQty: product.cartData.qty
-      }))
-      .forEach(product => delete product.cartData)
+    const products = response.data.map(product => ({
+      ...product,
+      orderQty: product.cartData.qty
+    }))
+    // .forEach(product => delete product.cartData)
+    products.forEach(product => delete product.cartData)
 
     dispatch(setProducts(products))
   } catch (error) {
@@ -115,6 +111,7 @@ export default function productsReducer(state = initialState, action) {
   switch (action.type) {
     case SET_PRODUCTS:
       return action.products
+
     case ADD_PRODUCT: {
       if (state.find(product => product.id === action.product.id))
         return state.map(
@@ -125,8 +122,10 @@ export default function productsReducer(state = initialState, action) {
         )
       return [...state, {...action.product, orderQty: action.orderQty}]
     }
+
     case REMOVE_PRODUCT:
       return state.filter(product => product.id !== action.productId)
+
     case EDIT_QTY:
       return state.map(
         product =>
@@ -134,8 +133,10 @@ export default function productsReducer(state = initialState, action) {
             ? {...product, orderQty: action.newQty}
             : product
       )
+
     case CHECKOUT:
       return []
+
     default:
       return state
   }

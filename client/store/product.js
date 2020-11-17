@@ -6,10 +6,6 @@ import axios from 'axios'
 const GET_PRODUCTS = 'GET_PRODUCTS'
 
 /**
- * INITIAL STATE
- */
-// const defaultProducts = []
-/**
  * ACTION CREATORS
  */
 const getProducts = products => ({type: GET_PRODUCTS, products})
@@ -24,7 +20,7 @@ export const fetchProducts = () => async dispatch => {
     const products = response.data
     dispatch(getProducts(products))
   } catch (error) {
-    console.error('SOMETHING WENT WRONG ', error)
+    console.error('SOMETHING WENT WRONG FETCHING PRODUCTS ', error)
   }
 }
 
