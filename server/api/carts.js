@@ -4,14 +4,25 @@ module.exports = router
 
 //mounted on /api/carts
 
-///this is the route for viewing products
+// SECURE ROUTES
+// protect anyone from seeing the entire db?
+// const forAdminAndUser = (req, res, next) => {
+//   // console.log('isAdmin?', req.user.isAdmin)
+//   if (!req.user.isAdmin || !req.user && req.params.id !== req.user.id) {
+//     const err = new Error('This page is only available to admins!')
+//     err.status = 401
+//     return next(err)
+//   }
+//   next()
+// }
 
+///this is the route for viewing products
 router.get('/', async (req, res, next) => {
   try {
     const carts = await Order.findOne({
       where: {
         ordered: false,
-        userId: req.user.dataValues.id
+        userId: req.user.dataValues.id // SOMETIMES GET AN ERROR THAT DATAVALUES DOES NOT EXIST
       },
       include: [Product]
     })

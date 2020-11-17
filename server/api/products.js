@@ -4,6 +4,9 @@ module.exports = router
 
 //mounted on /api/products
 
+// SECURE ROUTES
+// no need to secure these routes?
+
 router.get('/', async (req, res, next) => {
   try {
     console.log(Object.keys(Product.prototype))

@@ -4,8 +4,20 @@ module.exports = router
 
 //mounted on /api/orders
 
+// SECURE ROUTES
+// protect if the user is not an admin or the userId  does not equal what??
+const forAdminAndUser = (req, res, next) => {
+  // console.log('isAdmin?', req.user.isAdmin)
+  if (!req.user.isAdmin || (!req.user && req.params.id !== req.user.id)) {
+    const err = new Error('FORBIDDEN!')
+    err.status = 401
+    return next(err)
+  }
+  next()
+}
+
 // Gets Products but we don't use it
-router.get('/', async (req, res, next) => {
+router.get('/', forAdminAndUser, async (req, res, next) => {
   try {
     const orders = await Order.findAll()
 
@@ -16,7 +28,7 @@ router.get('/', async (req, res, next) => {
 })
 
 // Add to Cart Route
-router.post('/', async (req, res, next) => {
+router.post('/', forAdminAndUser, async (req, res, next) => {
   try {
     const [order] = await Order.findOrCreate({
       where: {
