@@ -13,6 +13,7 @@ const Order = db.define('order', {
   }
 })
 
+
 // how do i get req.body here?
 Order.findOrderForUser = function(id) {
   return User.findOne({

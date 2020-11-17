@@ -8,18 +8,15 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    console.log('ORDER MAGIC METHODS', Object.keys(Order.prototype))
-    console.log('The body', req.body)
     const carts = await Order.findOne({
       where: {
         ordered: false,
-        id: req.user.dataValues.id
+        userId: req.user.dataValues.id
       },
       include: [Product]
     })
-    res.json(carts.products)
-
-    console.log('THIS IS THE CART:', carts)
+    const response = carts ? carts.products : []
+    res.json(response)
   } catch (err) {
     next(err)
   }
@@ -33,7 +30,7 @@ router.put('/', async (req, res, next) => {
     const foundOrder = await Order.findOne({
       where: {
         ordered: false,
-        id: req.user.dataValues.id
+        userId: req.user.dataValues.id
       }
     })
     const updatedOrder = await foundOrder.update({ordered: true})
@@ -53,7 +50,7 @@ router.delete('/:productId', async (req, res, next) => {
     const foundOrder = await Order.findOne({
       where: {
         ordered: false,
-        id: req.user.dataValues.id
+        userId: req.user.dataValues.id
       }
     })
     /*could also probably use magic method foundOrder.removeProduct({
@@ -81,7 +78,7 @@ router.put('/:productId', async (req, res, next) => {
     const foundOrder = await Order.findOne({
       where: {
         ordered: false,
-        id: req.user.dataValues.id
+        userId: req.user.dataValues.id
       }
     })
 
@@ -91,7 +88,7 @@ router.put('/:productId', async (req, res, next) => {
         orderId: foundOrder.id
       }
     })
-    const product = await Product.findbyPk(req.params.productId)
+    const product = await Product.findByPk(req.params.productId)
     const price = product.price * req.body.qty
 
     const updatedProduct = await foundProduct.update({

@@ -3,6 +3,7 @@
 const db = require('../server/db')
 const {User, Product, Order, CartData} = require('../server/db/models')
 
+// NOTE: DELETE BEFORE FINAL PUSH
 /*const cartdata = [
   {
     qty: 3

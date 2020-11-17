@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-// import AllProducts from './all-products'
 
 const Navbar = ({handleClick, isLoggedIn, productCount}) => (
   <div>
@@ -43,9 +42,13 @@ const Navbar = ({handleClick, isLoggedIn, productCount}) => (
  * CONTAINER
  */
 const mapState = state => {
+  console.log('map state in navbar', state)
   return {
     isLoggedIn: !!state.user.id,
-    productCount: state.cart.length
+    productCount: state.cart.reduce((accum, currVal) => {
+      accum += currVal.orderQty
+      return accum
+    }, 0)
   }
 }
 

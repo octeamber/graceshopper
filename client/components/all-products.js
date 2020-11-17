@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store/product'
 import {Link} from 'react-router-dom'
+import ProductForm from './product-form'
 
 /**
  * COMPONENT
@@ -12,10 +13,10 @@ class AllProducts extends React.Component {
   }
   render() {
     const {products} = this.props
+    const {user} = this.props
 
     return (
       <div>
-        {/* <h1>All Products</h1> */}
         <div>
           {products.map(product => (
             <div key={product.id}>
@@ -27,6 +28,7 @@ class AllProducts extends React.Component {
             </div>
           ))}
         </div>
+        <div>{user.isAdmin && <ProductForm />}</div>
       </div>
     )
   }
@@ -36,7 +38,8 @@ class AllProducts extends React.Component {
  */
 const mapState = state => {
   return {
-    products: state.products
+    products: state.products,
+    user: state.user
   }
 }
 
