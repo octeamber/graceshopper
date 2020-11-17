@@ -4,16 +4,15 @@ import {deleteProduct, changeQty} from '../store/cart-reducer'
 
 const SingleCartProduct = props => {
   const {product, removeProduct, updateQty} = props
+  const orderQty = product.orderQty
   return (
     <div>
       <h4>{product.name}</h4>
       <div className="cartProduct">
         <img src={product.imageUrl} style={{width: '80px', height: '90px'}} />
         <div>
-          <p>
-            Total price: ${Number(product.price) / 100 * product.cartData.qty}
-          </p>
-          <p>QTY: {product.cartData.qty}</p>
+          <p>Total price: ${product.price / 100 * orderQty}</p>
+          <p>QTY: {orderQty}</p>
           <input
             onChange={event =>
               updateQty(product.id, Number(event.target.value))
@@ -22,7 +21,7 @@ const SingleCartProduct = props => {
             name="qty"
             min="1"
             max={product.qty}
-            value={product.cartData.qty}
+            value={orderQty}
           />
           <button type="button" onClick={() => removeProduct(product.id)}>
             remove product
