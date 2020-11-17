@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchProduct} from '../store/singleProduct'
 import {addProductToCart} from '../store/cart-reducer'
+import UpdateProductForm from './update-product-form'
 
 /**
  * COMPONENT
@@ -25,6 +26,7 @@ class SingleProduct extends React.Component {
 
   render() {
     const {product} = this.props
+    const {user} = this.props
 
     return (
       <div>
@@ -43,6 +45,7 @@ class SingleProduct extends React.Component {
           }
         />
         <button onClick={this.handleSubmitProduct}>Add to Cart</button>
+        <div>{user.isAdmin && <UpdateProductForm />}</div>
       </div>
     )
   }
@@ -50,7 +53,8 @@ class SingleProduct extends React.Component {
 
 const mapState = state => {
   return {
-    product: state.product
+    product: state.product,
+    user: state.user
   }
 }
 
