@@ -4,9 +4,12 @@ module.exports = router
 
 //mounted on /api/carts
 
+///this is the route for viewing products
+
 router.get('/', async (req, res, next) => {
   try {
     console.log('ORDER MAGIC METHODS', Object.keys(Order.prototype))
+    console.log('The body', req.body)
     const carts = await Order.findOne({
       where: {
         ordered: false,
@@ -14,13 +17,15 @@ router.get('/', async (req, res, next) => {
       },
       include: [Product]
     })
-    res.json(carts)
+    res.json(carts.products)
 
     console.log('THIS IS THE CART:', carts)
   } catch (err) {
     next(err)
   }
 })
+
+//// This is the route for the checkout
 
 router.put('/', async (req, res, next) => {
   try {
@@ -39,6 +44,8 @@ router.put('/', async (req, res, next) => {
   }
 })
 
+// Delete Route
+
 router.delete('/:productId', async (req, res, next) => {
   try {
     //find order
@@ -52,17 +59,20 @@ router.delete('/:productId', async (req, res, next) => {
     /*could also probably use magic method foundOrder.removeProduct({
       productId: req.params.productId
     })*/
-    const deletedProduct = await CartData.destroy({
+    console.log('DESTROY ID', req.params.productId)
+    await CartData.destroy({
       where: {
         productId: req.params.productId,
         orderId: foundOrder.id
       }
     })
-    res.json(deletedProduct)
+    res.send('SUCCES')
   } catch (err) {
     next(err)
   }
 })
+
+/// Update Qty
 
 router.put('/:productId', async (req, res, next) => {
   try {
