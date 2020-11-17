@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {checkoutProducts, addProductToCart} from '../store/cart-reducer'
+import {checkoutProducts} from '../store/cart-reducer'
 import SingleCartProduct from './cart-product'
 
 /**
@@ -42,9 +42,6 @@ class UserCart extends React.Component {
         <button type="button" onClick={this.handleCheckout}>
           checkout
         </button>
-        <button type="button" onClick={this.props.addTest}>
-          testing add
-        </button>
       </div>
     )
   }
@@ -60,8 +57,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    checkout: () => dispatch(checkoutProducts()),
-    addTest: () => dispatch(addProductToCart())
+    checkout: () => dispatch(checkoutProducts())
   }
 }
 

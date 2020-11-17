@@ -52,7 +52,7 @@ export const fetchCartProducts = () => async dispatch => {
       ...product,
       orderQty: product.cartData.qty
     }))
-    // .forEach(product => delete product.cartData)
+
     products.forEach(product => delete product.cartData)
 
     dispatch(setProducts(products))

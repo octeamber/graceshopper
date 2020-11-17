@@ -78,7 +78,7 @@ router.put('/:productId', async (req, res, next) => {
     const foundOrder = await Order.findOne({
       where: {
         ordered: false,
-        id: req.user.dataValues.id
+        userId: req.user.dataValues.id
       }
     })
 
