@@ -1,55 +1,49 @@
 import axios from 'axios'
 
-//Dummy data
-// const orderId = 5
-// const products = [
-//   {
-//     id: 8,
-//     name: 'Creamsicle Mug',
-//     price: 2400,
-//     description: 'A good coffee mug.',
-//     qty: 10,
-//     imageUrl: '../images/creamsicle_mug.jpg',
-//     orderQty: 2
-//   },
-//   {
-//     id: 4,
-//     name: 'Pink Mug',
-//     price: 2000,
-//     description: 'A small coffee mug.',
-//     qty: 10,
-//     imageUrl: '../images/pink_mug.jpg',
-//     orderQty: 4
-//   }
-// ]
-// const aProduct = {
-//   id: 13,
-//   name: 'Salt Jar',
-//   price: 4000,
-//   description: 'A lidded jar for salt on your counter.',
-//   qty: 10,
-//   imageUrl: '../images/salt_jar.jpg'
-// }
 /**
  * ACTION TYPES
  */
+
 const SET_PRODUCTS = 'SET_PRODUCTS'
+
 const EDIT_QTY = 'EDIT_QTY'
+
 const REMOVE_PRODUCT = 'REMOVE_PRODUCTS'
+
 const CHECKOUT = 'CHECKOUT'
+
 const ADD_PRODUCT = 'ADD_PRODUCT'
+
 /**
  * ACTION CREATORS
  */
-const setProducts = products => ({type: SET_PRODUCTS, products}) // SETS THE PRODUCTS
+const setProducts = products => ({
+  type: SET_PRODUCTS,
+  products
+})
+
 const addProduct = (product, orderQty) => ({
   type: ADD_PRODUCT,
   product,
   orderQty
-}) // TAKES THE WHOLE PRODUCT FROM SINGLE PRODUCT AND THE ORDER QTY FROM ITS REACT COMPONENT
-const editQty = (productId, newQty) => ({type: EDIT_QTY, productId, newQty}) // EDITS THE QTY IN THE FRONT END
-const removeProduct = productId => ({type: REMOVE_PRODUCT, productId})
-const checkout = orderId => ({type: CHECKOUT, orderId}) //IN THE FRONT END THIS JUST CLEARS THE STATE AND SETS THE ORDER ID IN STATE
+})
+
+const editQty = (productId, newQty) => ({
+  type: EDIT_QTY,
+  productId,
+  newQty
+})
+
+const removeProduct = productId => ({
+  type: REMOVE_PRODUCT,
+  productId
+})
+
+const checkout = orderId => ({
+  type: CHECKOUT,
+  orderId
+})
+
 /**
  * THUNK CREATORS
  */
@@ -57,7 +51,14 @@ const checkout = orderId => ({type: CHECKOUT, orderId}) //IN THE FRONT END THIS 
 export const fetchCartProducts = () => async dispatch => {
   try {
     const response = await axios.get('/api/carts')
+
     const products = response.data
+      .map(product => ({
+        ...product,
+        orderQty: product.cartData.qty
+      }))
+      .forEach(product => delete product.cartData)
+
     dispatch(setProducts(products))
   } catch (error) {
     console.error('SOMETHING WENT WRONG SETTING PRODUCTS ', error)
@@ -75,7 +76,7 @@ export const addProductToCart = (product, orderQty) => async dispatch => {
 
 export const changeQty = (productId, newQty) => async dispatch => {
   try {
-    //await axios.put(`/api/carts/${productId}`, {qty: newQty})
+    await axios.put(`/api/carts/${productId}`, {qty: newQty})
     dispatch(editQty(productId, newQty))
   } catch (error) {
     console.error('SOMETHING WENT WRONG CHANGING QTY ', error)
@@ -103,11 +104,13 @@ export const checkoutProducts = () => async dispatch => {
     console.error('SOMETHING WENT WRONG CHEKING OUT ', error)
   }
 }
+
 //Initial State
 const initialState = []
 /**
  * REDUCER
  */
+
 export default function productsReducer(state = initialState, action) {
   switch (action.type) {
     case SET_PRODUCTS:
