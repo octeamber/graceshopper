@@ -9,7 +9,7 @@ module.exports = router
 const forAdminAndUser = (req, res, next) => {
   // console.log('isAdmin?', req.user.isAdmin)
   if (!req.user.isAdmin || (!req.user && req.params.id !== req.user.id)) {
-    const err = new Error('This page is only available to admins!')
+    const err = new Error('FORBIDDEN!')
     err.status = 401
     return next(err)
   }
