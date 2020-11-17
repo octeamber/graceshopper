@@ -15,7 +15,7 @@ import SingleProduct from './components/singleProduct'
  */
 class Routes extends Component {
   componentDidMount() {
-    this.props.loadInitialData()
+    this.props.loadInitialData(this.props.userId)
   }
 
   render() {
@@ -50,15 +50,16 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
+    userId: state.user.id,
     isLoggedIn: !!state.user.id
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    loadInitialData() {
+    loadInitialData(id) {
       dispatch(me())
-      dispatch(fetchCartProducts())
+      dispatch(fetchCartProducts(id))
     }
   }
 }

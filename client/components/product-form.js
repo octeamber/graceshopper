@@ -7,8 +7,8 @@ export class ProductForm extends React.Component {
     super(props)
     this.state = {
       productName: '',
-      price: null,
-      qty: null,
+      price: 0,
+      qty: 1,
       description: ''
     }
     this.handleChange = this.handleChange.bind(this)

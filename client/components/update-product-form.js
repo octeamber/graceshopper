@@ -7,7 +7,7 @@ export class UpdateProductForm extends React.Component {
     super(props)
     this.state = {
       productName: '',
-      price: null,
+      price: 0,
       qty: null,
       description: ''
     }

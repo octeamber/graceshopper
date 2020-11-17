@@ -16,7 +16,7 @@ const SingleCartProduct = props => {
             Qty:
             <input
               onChange={event =>
-                updateQty(product.id, Number(event.target.value))
+                updateQty(product.id, Number(event.target.value), props.userId)
               }
               type="number"
               name="qty"
@@ -28,7 +28,7 @@ const SingleCartProduct = props => {
           <button
             type="button"
             className="button button-outline"
-            onClick={() => removeProduct(product.id)}
+            onClick={() => removeProduct(product.id, props.userId)}
           >
             remove product
           </button>
@@ -38,11 +38,17 @@ const SingleCartProduct = props => {
   )
 }
 
-const mapDispatch = dispatch => {
+const mapState = state => {
   return {
-    removeProduct: id => dispatch(deleteProduct(id)),
-    updateQty: (id, newQty) => dispatch(changeQty(id, newQty))
+    userId: state.user.id
   }
 }
 
-export default connect(null, mapDispatch)(SingleCartProduct)
+const mapDispatch = dispatch => {
+  return {
+    removeProduct: (id, userId) => dispatch(deleteProduct(id, userId)),
+    updateQty: (id, newQty, userId) => dispatch(changeQty(id, newQty, userId))
+  }
+}
+
+export default connect(mapState, mapDispatch)(SingleCartProduct)
