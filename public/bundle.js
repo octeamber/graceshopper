@@ -475,7 +475,7 @@ var UserCart = /*#__PURE__*/function (_React$Component) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.props.checkout();
+                return this.props.checkout(this.props.userId);
 
               case 2:
                 orderId = _context.sent;
@@ -533,7 +533,8 @@ var UserCart = /*#__PURE__*/function (_React$Component) {
 
 var mapState = function mapState(state) {
   return {
-    products: state.cart
+    products: state.cart,
+    userId: state.user.id
   };
 };
 
@@ -1747,7 +1748,7 @@ var deleteProduct = function deleteProduct(productId, id) {
     };
   }();
 };
-var checkoutProducts = function checkoutProducts() {
+var checkoutProducts = function checkoutProducts(id) {
   return /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch) {
       var response, order;
@@ -1756,26 +1757,40 @@ var checkoutProducts = function checkoutProducts() {
           switch (_context5.prev = _context5.next) {
             case 0:
               _context5.prev = 0;
-              _context5.next = 3;
+
+              if (!id) {
+                _context5.next = 10;
+                break;
+              }
+
+              _context5.next = 4;
               return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put('/api/carts');
 
-            case 3:
+            case 4:
               response = _context5.sent;
               order = response.data;
               dispatch(checkout());
               return _context5.abrupt("return", order.id);
 
-            case 9:
-              _context5.prev = 9;
+            case 10:
+              dispatch(checkout());
+              return _context5.abrupt("return", Math.floor(100 * Math.random()));
+
+            case 12:
+              _context5.next = 17;
+              break;
+
+            case 14:
+              _context5.prev = 14;
               _context5.t0 = _context5["catch"](0);
               console.error('SOMETHING WENT WRONG CHEKING OUT ', _context5.t0);
 
-            case 12:
+            case 17:
             case "end":
               return _context5.stop();
           }
         }
-      }, _callee5, null, [[0, 9]]);
+      }, _callee5, null, [[0, 14]]);
     }));
 
     return function (_x5) {

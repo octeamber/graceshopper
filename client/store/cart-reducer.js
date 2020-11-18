@@ -106,12 +106,17 @@ export const deleteProduct = (productId, id) => {
   }
 }
 
-export const checkoutProducts = () => async dispatch => {
+export const checkoutProducts = id => async dispatch => {
   try {
-    const response = await axios.put('/api/carts')
-    const order = response.data
-    dispatch(checkout())
-    return order.id
+    if (id) {
+      const response = await axios.put('/api/carts')
+      const order = response.data
+      dispatch(checkout())
+      return order.id
+    } else {
+      dispatch(checkout())
+      return Math.floor(100 * Math.random())
+    }
   } catch (error) {
     console.error('SOMETHING WENT WRONG CHEKING OUT ', error)
   }
