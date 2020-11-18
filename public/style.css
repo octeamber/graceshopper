@@ -1,9 +1,11 @@
 body {
   font-family: sans-serif;
+  color: #fb8500;
 }
 
 a {
   text-decoration: none;
+  color: #ffb703;
 }
 
 label {
@@ -62,4 +64,17 @@ nav a {
   height: 25rem;
   width: 20rem;
   margin-right: 5rem;
+}
+
+button {
+  background-color: #6a040f;
+}
+
+form button {
+  color: white;
+  background-color: #6a040f;
+}
+
+a:hover {
+  color: #ff006e;
 }

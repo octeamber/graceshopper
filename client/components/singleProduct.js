@@ -59,7 +59,7 @@ const mapState = state => {
   // console.log("MAP STATE IN SINGLE PROD", state)
   return {
     product: state.product,
-    userId: state.user.id
+    userId: state.user.id,
     user: state.user
   }
 }
