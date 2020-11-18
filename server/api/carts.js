@@ -4,18 +4,8 @@ module.exports = router
 
 //mounted on /api/carts
 
-// SECURE ROUTES
-const forAdmin = (req, res, next) => {
-  if (!req.user || !req.user.isAdmin) {
-    const err = new Error('This page is only available to admins!')
-    err.status = 401
-    return next(err)
-  }
-  next()
-}
-
 ///this is the route for viewing products
-router.get('/', forAdmin, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const carts = await Order.findOne({
       where: {
@@ -33,7 +23,7 @@ router.get('/', forAdmin, async (req, res, next) => {
 
 //// This is the route for the checkout
 
-router.put('/', forAdmin, async (req, res, next) => {
+router.put('/', async (req, res, next) => {
   try {
     const foundOrder = await Order.findOne({
       where: {
@@ -50,7 +40,7 @@ router.put('/', forAdmin, async (req, res, next) => {
 })
 
 // Delete Route
-router.delete('/:productId', forAdmin, async (req, res, next) => {
+router.delete('/:productId', async (req, res, next) => {
   try {
     const foundOrder = await Order.findOne({
       where: {
@@ -73,7 +63,7 @@ router.delete('/:productId', forAdmin, async (req, res, next) => {
 
 /// Update Qty
 
-router.put('/:productId', forAdmin, async (req, res, next) => {
+router.put('/:productId', async (req, res, next) => {
   try {
     const foundOrder = await Order.findOne({
       where: {
