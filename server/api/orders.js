@@ -5,7 +5,7 @@ module.exports = router
 //mounted on /api/orders
 
 // SECURE ROUTES
-const forAdminAndUser = (req, res, next) => {
+const forAdmin = (req, res, next) => {
   if (!req.user || !req.user.isAdmin) {
     const err = new Error('This page is only available to admins!')
     err.status = 401
@@ -14,7 +14,7 @@ const forAdminAndUser = (req, res, next) => {
   next()
 }
 
-router.get('/', forAdminAndUser, async (req, res, next) => {
+router.get('/', forAdmin, async (req, res, next) => {
   try {
     const orders = await Order.findAll()
 
@@ -25,7 +25,7 @@ router.get('/', forAdminAndUser, async (req, res, next) => {
 })
 
 // Add to Cart Route
-router.post('/', forAdminAndUser, async (req, res, next) => {
+router.post('/', forAdmin, async (req, res, next) => {
   try {
     const [order] = await Order.findOrCreate({
       where: {
