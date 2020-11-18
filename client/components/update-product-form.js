@@ -47,7 +47,7 @@ export class UpdateProductForm extends React.Component {
           <input
             onChange={this.handleChange}
             name="productName"
-            type="string"
+            type="text"
             value={state.productName}
           />
           <label htmlFor="price">
@@ -86,7 +86,7 @@ export class UpdateProductForm extends React.Component {
           <input
             onChange={this.handleChange}
             name="qty"
-            type="numbver"
+            type="number"
             value={state.qty}
           />
           <button
