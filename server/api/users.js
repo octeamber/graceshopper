@@ -4,7 +4,6 @@ module.exports = router
 
 // SECURE ROUTES
 const forAdmin = (req, res, next) => {
-  // console.log('isAdmin?', req.user.isAdmin)
   if (!req.user || !req.user.isAdmin) {
     const err = new Error('This page is only available to admins!')
     err.status = 401
@@ -15,7 +14,6 @@ const forAdmin = (req, res, next) => {
 
 router.get('/', forAdmin, async (req, res, next) => {
   try {
-    console.log(Object.keys(User.prototype))
     const users = await User.findAll({
       // explicitly select only the id and email fields - even though
       // users' passwords are encrypted, it won't help if we just

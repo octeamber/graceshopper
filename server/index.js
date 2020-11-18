@@ -67,13 +67,6 @@ const createApp = () => {
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
 
-  // TESTING ADMIN
-  // app.use((req, res, next) => {
-  //   // console.log('REQ.USER', req.user)
-  //   console.log('REQ.USER', req.user.isAdmin)  // undefined if the user is a guest
-  //   next()
-  // })
-
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
 

@@ -986,7 +986,6 @@ var SingleProduct = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 var mapState = function mapState(state) {
-  // console.log("MAP STATE IN SINGLE PROD", state)
   return {
     product: state.product,
     userId: state.user.id,
