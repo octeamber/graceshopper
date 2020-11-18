@@ -44,7 +44,8 @@ const checkout = orderId => ({
  * THUNK CREATORS
  */
 
-export const fetchCartProducts = id => async dispatch => {
+export const fetchCartProducts = () => async (dispatch, getState) => {
+  const id = getState().user.id
   try {
     if (id) {
       const response = await axios.get('/api/carts')

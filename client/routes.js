@@ -15,7 +15,7 @@ import SingleProduct from './components/singleProduct'
  */
 class Routes extends Component {
   componentDidMount() {
-    this.props.loadInitialData(this.props.userId)
+    this.props.loadInitialData()
   }
 
   render() {
@@ -57,9 +57,9 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    loadInitialData(id) {
-      dispatch(me())
-      dispatch(fetchCartProducts(id))
+    async loadInitialData() {
+      await dispatch(me())
+      dispatch(fetchCartProducts())
     }
   }
 }

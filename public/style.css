@@ -54,9 +54,15 @@ nav a {
   width: 20rem;
   margin-right: 5rem;
 }
+.button,
 button {
   background-color: #6a040f;
+  border: 0.1rem solid #6a040f;
 }
+.button.button-outline {
+  color: #6a040f;
+}
+
 form button {
   color: white;
   background-color: #6a040f;

@@ -58,7 +58,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    checkout: () => dispatch(checkoutProducts())
+    checkout: id => dispatch(checkoutProducts(id))
   }
 }
 
