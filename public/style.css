@@ -1,20 +1,18 @@
 body {
   font-family: sans-serif;
+  color: #fb8500;
 }
-
 a {
   text-decoration: none;
+  color: #ffb703;
 }
-
 label {
   display: block;
 }
-
 nav a {
   display: inline-block;
   margin: 0rem 5rem;
 }
-
 #header {
   display: flex;
   flex-direction: row;
@@ -22,7 +20,6 @@ nav a {
   margin-bottom: 0px;
   justify-content: space-between;
 }
-
 #header .links {
   width: 45em;
   display: flex;
@@ -30,36 +27,40 @@ nav a {
   justify-content: space-evenly;
   align-items: center;
 }
-
 #footer {
   display: flex;
   justify-content: space-evenly;
   width: 35%;
   align-items: baseline;
 }
-
 .cartProduct {
   display: flex;
 }
-
 .row {
   display: flex;
   flex-wrap: wrap;
   align-content: space-between;
 }
-
 .row .column.column-40 {
   flex: 0 0 30%;
   max-width: 30%;
 }
-
 .column img {
   width: 23rem;
   height: 28rem;
 }
-
 .cartImage {
   height: 25rem;
   width: 20rem;
   margin-right: 5rem;
+}
+button {
+  background-color: #6a040f;
+}
+form button {
+  color: white;
+  background-color: #6a040f;
+}
+a:hover {
+  color: #ff006e;
 }
