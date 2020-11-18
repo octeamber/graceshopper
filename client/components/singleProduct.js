@@ -56,7 +56,6 @@ class SingleProduct extends React.Component {
 }
 
 const mapState = state => {
-  // console.log("MAP STATE IN SINGLE PROD", state)
   return {
     product: state.product,
     userId: state.user.id,

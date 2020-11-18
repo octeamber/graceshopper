@@ -5,11 +5,9 @@ module.exports = router
 //mounted on /api/products
 
 // SECURE ROUTES
-// no need to secure these routes?
-const forAdminAndUser = (req, res, next) => {
-  // console.log('isAdmin?', req.user.isAdmin)
-  if (!req.user.isAdmin || (!req.user && req.params.id !== req.user.id)) {
-    const err = new Error('FORBIDDEN!')
+const forAdmin = (req, res, next) => {
+  if (!req.user || !req.user.isAdmin) {
+    const err = new Error('This page is only available to admins!')
     err.status = 401
     return next(err)
   }
@@ -18,7 +16,6 @@ const forAdminAndUser = (req, res, next) => {
 
 router.get('/', async (req, res, next) => {
   try {
-    console.log(Object.keys(Product.prototype))
     const products = await Product.findAll()
     res.json(products)
   } catch (err) {
@@ -35,7 +32,7 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.post('/', forAdminAndUser, async (req, res, next) => {
+router.post('/', forAdmin, async (req, res, next) => {
   try {
     const newProduct = await Product.create(req.body)
     res.json(newProduct)
@@ -59,8 +56,6 @@ router.delete('/:productId', async (req, res, next) => {
 
 router.put('/:productId', async (req, res, next) => {
   try {
-    console.log('THIS IS THE PARAMS: ', req.params)
-    console.log('THIS IS THE BODY ', req.body)
     const foundProduct = await Product.findByPk(req.params.productId)
     const updatedProduct = await foundProduct.update(req.body)
     res.json(updatedProduct)
