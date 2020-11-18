@@ -33,7 +33,7 @@ router.get('/', forAdmin, async (req, res, next) => {
 
 //// This is the route for the checkout
 
-router.put('/', forAdmin, async (req, res, next) => {
+router.put('/', async (req, res, next) => {
   try {
     const foundOrder = await Order.findOne({
       where: {
@@ -50,7 +50,7 @@ router.put('/', forAdmin, async (req, res, next) => {
 })
 
 // Delete Route
-router.delete('/:productId', forAdmin, async (req, res, next) => {
+router.delete('/:productId', async (req, res, next) => {
   try {
     const foundOrder = await Order.findOne({
       where: {
@@ -73,7 +73,7 @@ router.delete('/:productId', forAdmin, async (req, res, next) => {
 
 /// Update Qty
 
-router.put('/:productId', forAdmin, async (req, res, next) => {
+router.put('/:productId', async (req, res, next) => {
   try {
     const foundOrder = await Order.findOne({
       where: {

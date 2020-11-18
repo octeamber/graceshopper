@@ -25,7 +25,7 @@ router.get('/', forAdmin, async (req, res, next) => {
 })
 
 // Add to Cart Route
-router.post('/', forAdmin, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const [order] = await Order.findOrCreate({
       where: {
