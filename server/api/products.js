@@ -14,6 +14,7 @@ const forAdmin = (req, res, next) => {
   next()
 }
 
+//this is the route for getting all products
 router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll()
@@ -23,6 +24,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+//this is the route for getting a single product
 router.get('/:id', async (req, res, next) => {
   try {
     const singleProduct = await Product.findByPk(req.params.id)
@@ -32,6 +34,7 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+//this is the route for creating a new product -admin only
 router.post('/', forAdmin, async (req, res, next) => {
   try {
     const newProduct = await Product.create(req.body)
@@ -41,6 +44,7 @@ router.post('/', forAdmin, async (req, res, next) => {
   }
 })
 
+//this is the route for deleting a product -admin only
 router.delete('/:productId', async (req, res, next) => {
   try {
     const deletedProduct = await Product.destroy({
@@ -54,6 +58,7 @@ router.delete('/:productId', async (req, res, next) => {
   }
 })
 
+//this is the route for updating a product
 router.put('/:productId', async (req, res, next) => {
   try {
     const foundProduct = await Product.findByPk(req.params.productId)

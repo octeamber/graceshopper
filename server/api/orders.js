@@ -4,6 +4,7 @@ module.exports = router
 
 //mounted on /api/orders
 
+//finds all orders
 router.get('/', async (req, res, next) => {
   try {
     const orders = await Order.findAll()
@@ -14,7 +15,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// Add to Cart Route
+//Add to Cart Route
 router.post('/', async (req, res, next) => {
   try {
     const [order] = await Order.findOrCreate({
@@ -26,9 +27,9 @@ router.post('/', async (req, res, next) => {
     //NOTE: find or create returns the order and a boolean value
 
     const product = await Product.findByPk(req.body.id)
-
     const price = product.price * req.body.qty
 
+    //magic method addProduct is method on order
     await order.addProduct(product, {
       through: {
         qty: req.body.qty,

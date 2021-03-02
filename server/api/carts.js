@@ -4,7 +4,7 @@ module.exports = router
 
 //mounted on /api/carts
 
-///this is the route for viewing products
+//this is the route for viewing products in the cart
 router.get('/', async (req, res, next) => {
   try {
     const carts = await Order.findOne({
@@ -21,8 +21,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-//// This is the route for the checkout
-
+// This is the route for the checkout
 router.put('/', async (req, res, next) => {
   try {
     const foundOrder = await Order.findOne({
@@ -39,7 +38,7 @@ router.put('/', async (req, res, next) => {
   }
 })
 
-// Delete Route
+// Delete Product from Cart
 router.delete('/:productId', async (req, res, next) => {
   try {
     const foundOrder = await Order.findOne({
@@ -61,8 +60,7 @@ router.delete('/:productId', async (req, res, next) => {
   }
 })
 
-/// Update Qty
-
+// Update Qty in Cart
 router.put('/:productId', async (req, res, next) => {
   try {
     const foundOrder = await Order.findOne({
