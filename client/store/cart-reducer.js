@@ -10,6 +10,11 @@ const REMOVE_PRODUCT = 'REMOVE_PRODUCTS'
 const CHECKOUT = 'CHECKOUT'
 const ADD_PRODUCT = 'ADD_PRODUCT'
 
+function storeLocal(product, orderQty) {
+  let cartStorage = window.localStorage
+  cartStorage.setItem(product, orderQty)
+  console.log(cartStorage)
+}
 /**
  * ACTION CREATORS
  */
@@ -72,6 +77,7 @@ export const addProductToCart = (product, orderQty, id) => async dispatch => {
       await axios.post(`/api/orders/`, {qty: orderQty, id: product.id})
       dispatch(addProduct(product, orderQty))
     } else {
+      storeLocal(product, orderQty)
       dispatch(addProduct(product, orderQty))
     }
   } catch (error) {
