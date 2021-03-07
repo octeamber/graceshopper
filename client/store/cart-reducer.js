@@ -12,24 +12,36 @@ const ADD_PRODUCT = 'ADD_PRODUCT'
 
 let cartStorage = null
 function storeLocal(id, orderQty) {
-  //need to store product and orderQty for each product
-  if (!cartStorage) {
-    cartStorage = window.localStorage
-    cartStorage.setItem(id, orderQty)
-    console.log(cartStorage)
-  } else {
-    cartStorage.setItem(id, orderQty)
-    console.log(cartStorage)
+  try {
+    //need to store product and orderQty for each product
+    if (!cartStorage) {
+      cartStorage = window.localStorage
+      cartStorage.setItem(id, orderQty)
+      console.log(cartStorage)
+    } else {
+      cartStorage.setItem(id, orderQty)
+      console.log(cartStorage)
+    }
+  } catch (error) {
+    console.error('SOMETHING WENT WRONG WITH CART STORAGE ', error)
   }
 }
 
 function editLocalStorageQty(id, orderQty) {
-  localStorage.removeItem(id)
-  localStorage.setItem(id, orderQty)
+  try {
+    localStorage.removeItem(id)
+    localStorage.setItem(id, orderQty)
+  } catch (error) {
+    console.error('SOMETHING WENT WRONG EDITING LOCAL STORAGE ', error)
+  }
 }
 
 function deleteLocalStorageItem(productId) {
-  localStorage.removeItem(productId)
+  try {
+    localStorage.removeItem(productId)
+  } catch (error) {
+    console.error('SOMETHING WENT WRONG DELETING LOCAL STORAGE ', error)
+  }
 }
 
 /**
