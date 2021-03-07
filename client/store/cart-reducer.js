@@ -22,6 +22,12 @@ function storeLocal(id, orderQty) {
     console.log(cartStorage)
   }
 }
+
+function editLocalStorageQty(id, orderQty) {
+  localStorage.removeItem(id)
+  localStorage.setItem(id, orderQty)
+}
+
 /**
  * ACTION CREATORS
  */
@@ -99,6 +105,7 @@ export const changeQty = (productId, newQty, id) => async dispatch => {
       dispatch(editQty(productId, newQty))
     } else {
       dispatch(editQty(productId, newQty))
+      editLocalStorageQty(productId, newQty)
     }
   } catch (error) {
     console.error('SOMETHING WENT WRONG CHANGING QTY ', error)
