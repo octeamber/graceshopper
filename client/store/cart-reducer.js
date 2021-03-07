@@ -28,6 +28,10 @@ function editLocalStorageQty(id, orderQty) {
   localStorage.setItem(id, orderQty)
 }
 
+function deleteLocalStorageItem(productId) {
+  localStorage.removeItem(productId)
+}
+
 /**
  * ACTION CREATORS
  */
@@ -120,6 +124,8 @@ export const deleteProduct = (productId, id) => {
         dispatch(removeProduct(productId))
       } else {
         dispatch(removeProduct(productId))
+        console.log('THE ID', productId)
+        deleteLocalStorageItem(productId)
       }
     } catch (error) {
       console.log(error)
