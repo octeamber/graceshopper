@@ -6,6 +6,7 @@ import SingleCartProduct from './cart-product'
 /**
  * COMPONENT
  */
+
 class UserCart extends React.Component {
   constructor() {
     super()

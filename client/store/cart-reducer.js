@@ -10,6 +10,24 @@ const REMOVE_PRODUCT = 'REMOVE_PRODUCTS'
 const CHECKOUT = 'CHECKOUT'
 const ADD_PRODUCT = 'ADD_PRODUCT'
 
+let cartStorage = null
+function storeLocal(id, orderQty) {
+  //need to store product and orderQty for each product
+  if (!cartStorage) {
+    cartStorage = window.localStorage
+    cartStorage.setItem(id, orderQty)
+    console.log(cartStorage)
+  } else {
+    cartStorage.setItem(id, orderQty)
+    console.log(cartStorage)
+  }
+}
+
+function editLocalStorageQty(id, orderQty) {
+  localStorage.removeItem(id)
+  localStorage.setItem(id, orderQty)
+}
+
 /**
  * ACTION CREATORS
  */
@@ -72,6 +90,7 @@ export const addProductToCart = (product, orderQty, id) => async dispatch => {
       await axios.post(`/api/orders/`, {qty: orderQty, id: product.id})
       dispatch(addProduct(product, orderQty))
     } else {
+      storeLocal(product.id, orderQty)
       dispatch(addProduct(product, orderQty))
     }
   } catch (error) {
@@ -86,6 +105,7 @@ export const changeQty = (productId, newQty, id) => async dispatch => {
       dispatch(editQty(productId, newQty))
     } else {
       dispatch(editQty(productId, newQty))
+      editLocalStorageQty(productId, newQty)
     }
   } catch (error) {
     console.error('SOMETHING WENT WRONG CHANGING QTY ', error)
